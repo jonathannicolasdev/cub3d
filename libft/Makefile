@@ -55,7 +55,7 @@ CFLAGS = -Werror -Wextra -Wall
 
 $(NAME): $(OBJS)
 	${CC} ${CFLAGS} -c ${SRCS}
-	ar rc $(NAME) $(OBJS) libft.h
+	ar rc $(NAME) $(OBJS)
 
 all:	${NAME}
 

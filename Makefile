@@ -3,7 +3,7 @@ LIBFTNAME = libft.a
 LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
-SRC = test.c
+SRC = main.c
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 

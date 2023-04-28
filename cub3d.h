@@ -25,6 +25,10 @@
 # define KEY_S				1
 # define KEY_D				2
 
+
+#define screenWidth 640
+#define screenHeight 480
+
 typedef struct s_data {
 	void	*mlx;
 	void	*win;
@@ -48,4 +52,12 @@ typedef union u_rgb
 	int		rgb;
 	t_color	rgbs;
 }	t_rgb;
+
+typedef struct s_map {
+	char	**map;
+	int		width;
+	int		height;
+}	t_map;
+
+t_map	*read_map(char *filename);
 #endif
