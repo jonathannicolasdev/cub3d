@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_update.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnicolas <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/28 21:30:13 by jnicolas          #+#    #+#             */
+/*   Updated: 2023/04/28 22:31:26 by jnicolas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 t_map	*read_map(char *filename)
@@ -39,80 +51,80 @@ t_map	*read_map(char *filename)
 
 int	main(void)
 {
-	// start here
+	int		x;
+	double	position_x;
+	double	position_y;
+	double	player_dir_x;
+	double	player_dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	double	deltaDistX;
+	double	deltaDistY;
+	void	*mlx;
+	void	*win_ptr;
+	t_map	*map;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	double	perpWallDist;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	int		color;
+	int		j;
 
-	double posX = 10, posY = 12;                // x and y start position
-	double player_dir_x = -1, player_dir_y = 0; // initial direction vector
-	double plane_x = 0, plane_y = 0.66;        
-		// the 2d raycaster version of camera plane
-	double cameraX, rayDirX, rayDirY, deltaDistX, deltaDistY;
-	void *mlx;
-
-	t_map *map = read_map("");
+	map = read_map("");
 	mlx = mlx_init();
-
-	void *win_ptr = mlx_new_window(mlx, screenWidth, screenHeight, "cub3d");
-
-	// Camera *camera =init_camera();
-
-	// game loop
-
-	for (int x = 0; x < screenWidth; x++)
+	win_ptr = mlx_new_window(mlx, screenWidth, screenHeight, "cub3d");
+	position_x = 10;
+	position_y = 12;
+	player_dir_x = -1;
+	player_dir_y = 0;
+	plane_x = 0;
+	plane_y = 0.66;
+	x = 0;
+	while (x < screenWidth)
 	{
-		// calculate ray position and direction
 		cameraX = 2 * x / (double)screenWidth - 1;
-			// x-coordinate in camera space
 		plane_x = player_dir_y * 0.66;
 		plane_y = -player_dir_x * 0.66;
 		rayDirX = player_dir_x + plane_x * cameraX;
 		rayDirY = player_dir_y + plane_y * cameraX;
-		deltaDistX = fabs(1 / rayDirX);
-		deltaDistY = fabs(1 / rayDirY);
-
-		// which box of the map we're in
-		int mapX = (int)posX;
-		int mapY = (int)posY;
-
-		// length of ray from current position to next x or y-side
-		double sideDistX;
-		double sideDistY;
-
-		// length of ray from one x or y-side to next x or y-side
-		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
-		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
-
-		// what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
-
-		int hit = 0; // was there a wall hit?
-		int side;    // was a NS or a EW wall hit?
-
-		// calculate step and initial sideDist
+		mapX = (int)position_x;
+		mapY = (int)position_y;
+		deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+		deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		hit = 0;
 		if (rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (posX - mapX) * deltaDistX;
+			sideDistX = (position_x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - position_x) * deltaDistX;
 		}
 		if (rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (posY - mapY) * deltaDistY;
+			sideDistY = (position_y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - position_y) * deltaDistY;
 		}
-		// perform DDA
 		while (hit == 0)
 		{
-			// jump to next map square, either in x-direction, or in y-direction
 			if (sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
@@ -125,57 +137,33 @@ int	main(void)
 				mapY += stepY;
 				side = 1;
 			}
-			// Check if ray has hit a wall
 			if (map->map[mapX][mapY] != '0')
 				hit = 1;
 		}
-
-		double perpWallDist;
-		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 		if (side == 0)
 			perpWallDist = (sideDistX - deltaDistX);
 		else
 			perpWallDist = (sideDistY - deltaDistY);
-
-		// Calculate height of line to draw on screen
-		int lineHeight = (int)(screenHeight / perpWallDist);
-
-		// calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + screenHeight / 2;
+		lineHeight = (int)(screenHeight / perpWallDist);
+		drawStart = -lineHeight / 2 + screenHeight / 2;
 		if (drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + screenHeight / 2;
+		drawEnd = lineHeight / 2 + screenHeight / 2;
 		if (drawEnd >= screenHeight)
 			drawEnd = screenHeight - 1;
-
-		// choose wall color
-		int color;
-		switch (map->map[mapX][mapY])
-		{
-		case '1':
-		case '2':
-			color = RED;
-			break ; // red
-		case '3':
-		case '4':
-			color = GREEN;
-			break ; // green
-		case '5':
-		case '6':
+		if (map->map[mapX][mapY] == '1' || map->map[mapX][mapY] == '2')
+			color = RED ;
+		else if (map->map[mapX][mapY] == '3' || map->map[mapX][mapY] == '4')
 			color = BLUE;
-			break ; // blue
-		case '7':
-			color = 0xFFFF00;
-			break ; // white
-		default:
+		else if (map->map[mapX][mapY] == '5' || map->map[mapX][mapY] == '6')
+			color = BLUE;
+		else
 			color = 0xFFFFFF;
-			break ; // yellow
-		}
-		for (int j = drawStart; j <= drawEnd; j++)
-			mlx_pixel_put(mlx, win_ptr, x, j, color);
+		j = drawStart;
+		while (j <= drawEnd)
+			mlx_pixel_put(mlx, win_ptr, x, j++, color);
+		x++;
 	}
-
 	mlx_loop(mlx);
-
 	return (0);
 }
