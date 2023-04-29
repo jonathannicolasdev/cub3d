@@ -16,6 +16,9 @@
 # include "minilibx_opengl/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
+# include "libft/libft.h"
+# include <string.h>
+# include <math.h>
 
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_EXIT	17
@@ -28,6 +31,9 @@
 
 #define screenWidth 640
 #define screenHeight 480
+#define RED 0Xff0000
+#define GREEN 0X454B1B
+#define BLUE 0X0000FF
 
 typedef struct s_data {
 	void	*mlx;
