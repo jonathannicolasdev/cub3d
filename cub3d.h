@@ -71,10 +71,12 @@ typedef struct s_ray
 	double			camera_x;
 	double			ray_dir_x;
 	double			ray_dir_y;
-	double			side_dist_s;
+	double			side_dist_x;
 	double			side_dist_y;
 	double			delta_dist_x;
 	double			delta_dist_y;
+	int				step_x;
+	int				step_y;
 }					t_ray;
 
 typedef struct s_color
