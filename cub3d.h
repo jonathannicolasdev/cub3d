@@ -79,5 +79,7 @@ typedef struct s_map {
 	int		height;
 }	t_map;
 
-t_map	*read_map(char *filename);
+t_map		*read_map(char *filename);
+t_camera	*init_camera(t_data *data)
+
 #endif

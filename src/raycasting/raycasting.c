@@ -13,3 +13,16 @@
 //Raycasting goes here
 
 #include "../../cub3d.h"
+
+void	perform_raycasting(t_data *data)
+{
+	int         x;
+	t_camera    *camera;
+
+	camera = init_camera(data);
+	x = 0;
+	while (x < screenWidth)
+	{
+		perform_column_raycasting(camera, x);
+	}
+}

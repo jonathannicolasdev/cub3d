@@ -15,8 +15,6 @@
 t_camera	*init_camera(t_data *data)
 {
 	t_camera	*camera;
-	double		plane_x;
-	double		plane_y;
 
 	camera = malloc(sizeof(*camera));
 	if (!camera)
