@@ -43,7 +43,21 @@ typedef struct s_data {
 	int		bpp;
 	int		line_len;
 	int		endian;
+	double	pos_x;
+	double	pos_y;
+	double	player_dir_x;
+	double	player_dir_y;
 }	t_data;
+
+typedef struct s_camera {
+	double	camera_x;
+	double	camera_y;
+	double	camera_dir_x;
+	double	camera_dir_y;
+	double	camera_plane_x;
+	double	camera_plane_y;
+} t_camera
+
 
 typedef struct s_color
 {
