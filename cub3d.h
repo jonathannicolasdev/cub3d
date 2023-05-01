@@ -29,10 +29,20 @@
 # define KEY_D 2
 
 # define screen_width 640
-# define screenHeight 480
-# define RED 0Xff0000
-# define GREEN 0X454B1B
-# define BLUE 0X0000FF
+# define screen_height 480
+# define GREEN 0x00FF00
+# define RED 0xFF0000
+# define BLUE 0x0000FF
+
+typedef struct s_player
+{
+	double			vector_dir_x;
+	double			vector_dir_y;
+	double			pos_x;
+	double			pos_y;
+	// int		map_x;
+	// int		map_y;
+}					t_player;
 
 typedef struct s_data
 {
@@ -56,16 +66,6 @@ typedef struct s_camera
 	double			camera_plane_y;
 }					t_camera;
 
-typedef struct s_player
-{
-	double	vector_dir_x;
-	double	vector_dir_y;
-	double	pos_x;
-	double	pos_y;
-	int		map_x;
-	int		map_y;
-}	t_player;
-
 typedef struct s_ray
 {
 	double			camera_x;
@@ -77,6 +77,10 @@ typedef struct s_ray
 	double			delta_dist_y;
 	int				step_x;
 	int				step_y;
+	int				map_x;
+	int				map_y;
+	double			perpWallDist;
+
 }					t_ray;
 
 typedef struct s_color
@@ -102,5 +106,10 @@ typedef struct s_map
 
 t_map				*read_map(char *filename);
 t_camera			*init_camera(t_player *player);
+t_player			*init_player(double pos_x, double pos_y, double dir_x,
+						double dir_y);
+t_ray				*init_ray(t_player *player, t_camera *camera, int x_screen);
+
+void				perform_raycasting(t_player *player, t_map *map);
 
 #endif
