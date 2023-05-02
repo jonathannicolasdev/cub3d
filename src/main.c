@@ -42,12 +42,12 @@ t_map	*read_map(char *filename)
 int	main(void)
 {
 	t_map		*map;
-	t_player	*player;
-
+	//t_player	*player;
+	printf("hello");
 	map = read_map("");
 	mlx = mlx_init();
 	win_ptr = mlx_new_window(mlx, screen_width, screen_height, "cub3d");
-	player = init_player(10, 12, -1, 0);
+	t_player	*player = init_player(10, 12, -1, 0);
 	perform_raycasting(player, map);
 	mlx_loop(mlx);
 	return (0);
