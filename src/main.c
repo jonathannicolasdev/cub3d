@@ -47,7 +47,6 @@ int	main(void)
 	void		*mlx;
 	void		*win_ptr;
 
-	//t_player	*player;
 	map = read_map("");
 	mlx = mlx_init();
 	win_ptr = mlx_new_window(mlx, screen_width, screen_height, "cub3d");

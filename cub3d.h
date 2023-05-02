@@ -19,9 +19,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdbool.h>
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_EXIT 17
+# define KEY_LEFT				123
+# define KEY_RIGHT				124
 # define KEY_ESC 53
 # define KEY_W 13
 # define KEY_A 0
@@ -42,6 +45,17 @@ typedef struct s_player
 	double			pos_y;
 }					t_player;
 
+typedef struct s_key
+{
+	bool		w;
+	bool		a;
+	bool		s;
+	bool		d;
+
+	bool		left;
+	bool		right;
+}	t_key;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -60,6 +74,7 @@ typedef struct s_game
 	void			*win;
 	t_player		*player;
 	t_map			*map;
+	t_key			key;
 }	t_game;
 
 typedef struct s_camera
