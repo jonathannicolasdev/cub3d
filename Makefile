@@ -3,7 +3,7 @@ LIBFTNAME = libft.a
 LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
-SRC = main_update.c
+SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 

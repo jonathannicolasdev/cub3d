@@ -53,7 +53,7 @@ void	perform_dda(t_ray *ray, t_map *map)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (ray->side_dist_x < ray->delta_dist_y)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;

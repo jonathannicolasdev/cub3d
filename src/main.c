@@ -41,28 +41,14 @@ t_map	*read_map(char *filename)
 
 int	main(void)
 {
-	printf("hello");
-	// start here
+	t_map		*map;
+	t_player	*player;
 
-	double position_x = 22, position_y = 12;      // x and y start position
-	double dirX = -1, dirY = 0;       // initial direction vector
-	double planeX = 0, planeY = 0.66;
-	// the 2d raycaster version of camera plane
-	double cameraX, rayDirX, rayDirY, deltaDistX, deltaDistY;
-	void *mlx;
-	mlx_new_window(mlx, screenWidth, screenHeight, "cub3d");
-	// Camera *camera =init_camera();
-	// game loop
-	for (int x = 0; x < screenWidth; x++)
-	{
-		// calculate ray position and direction
-		cameraX = 2 * x / (double)screenWidth - 1;
-		// x-coordinate in camera space
-		rayDirX = dirX + planeX * cameraX;
-		rayDirY = dirY + planeY * cameraX;
-		deltaDistX = fabs(1 / rayDirX);
-		deltaDistY = fabs(1 / rayDirY);
-	}
-
+	map = read_map("");
+	mlx = mlx_init();
+	win_ptr = mlx_new_window(mlx, screen_width, screen_height, "cub3d");
+	player = init_player(10, 12, -1, 0);
+	perform_raycasting(player, map);
+	mlx_loop(mlx);
 	return (0);
 }
