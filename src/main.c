@@ -42,13 +42,24 @@ t_map	*read_map(char *filename)
 int	main(void)
 {
 	t_map		*map;
+	t_game		*game;
+	t_player	*player;
+	void		*mlx;
+	void		*win_ptr;
+
 	//t_player	*player;
-	printf("hello");
 	map = read_map("");
 	mlx = mlx_init();
 	win_ptr = mlx_new_window(mlx, screen_width, screen_height, "cub3d");
-	t_player	*player = init_player(10, 12, -1, 0);
-	perform_raycasting(player, map);
+	player = init_player(10, 12, -1, 0);
+	game = malloc(sizeof(t_game));
+	game->map = map;
+	game->mlx = mlx;
+	game->win = win_ptr;
+	game->player = player;
+	mlx_hook(game->win, X_EVENT_KEY_PRESS, 0, key_press, info);
+	mlx_hook(info->win, X_EVENT_KEY_RELEASE, 0, key_release, info);
+	mlx_loop_hook(mlx, game_loop, game);
 	mlx_loop(mlx);
 	return (0);
 }

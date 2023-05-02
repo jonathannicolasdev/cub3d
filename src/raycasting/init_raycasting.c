@@ -51,6 +51,8 @@ t_ray	*init_ray(t_player *player, t_camera *camera, int x_screen)
 	ray->ray_dir_y = player->vector_dir_y + camera->camera_plane_y * camera_x;
 	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	ray->map_x = map_x;
+	ray->map_y = map_y;
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
