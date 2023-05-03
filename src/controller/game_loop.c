@@ -15,7 +15,7 @@
 int	game_loop(t_game *game)
 {
 	printf("hello\n");
-	//move(game);
+	move(game);
 	perform_raycasting(game->player, game);
 	return (0);
 }
