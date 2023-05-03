@@ -14,7 +14,7 @@
 
 #include "../../cub3d.h"
 
-void	draw_column(int x, t_ray *ray, t_map *map)
+void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 {
 	int	lineHeight;
 	int	drawStart;
@@ -42,7 +42,7 @@ void	draw_column(int x, t_ray *ray, t_map *map)
 		color = 0xFFFFFF;
 	j = drawStart;
 	while (j <= drawEnd)
-		mlx_pixel_put(mlx, win_ptr, x, j++, color);
+		mlx_pixel_put(game->mlx, game->win, x, j++, color);
 }
 
 void	perform_dda(t_ray *ray, t_map *map)
@@ -74,17 +74,17 @@ void	perform_dda(t_ray *ray, t_map *map)
 		ray->perpWallDist = (ray->side_dist_y - ray->delta_dist_y);
 }
 
-void	perform_column_raycasting(t_player *player, t_camera *camera,
-		t_map *map, int x)
+void	perform_column_raycasting(t_player *player, t_camera *camera, 
+		t_game *game, int x)
 {
 	t_ray	*ray;
 
 	ray = init_ray(player, camera, x);
-	perform_dda(ray, map);
-	draw_column(x, ray, map);
+	perform_dda(ray, game->map);
+	draw_column(x, ray, game->map, game);
 }
 
-void	perform_raycasting(t_player *player, t_map *map)
+void	perform_raycasting(t_player *player, t_map *game)
 {
 	int			x;
 	t_camera	*camera;
@@ -93,7 +93,7 @@ void	perform_raycasting(t_player *player, t_map *map)
 	x = 0;
 	while (x < screen_width)
 	{
-		perform_column_raycasting(player, camera, map, x);
+		perform_column_raycasting(player, camera, game, x);
 		x++;
 	}
 }

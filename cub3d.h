@@ -31,8 +31,8 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
-# define move_speed 0.3
-# define rotation_speed 0.5
+# define move_speed 0.03
+# define rotation_speed 0.05
 
 # define screen_width 640
 # define screen_height 480
@@ -135,9 +135,11 @@ t_camera			*init_camera(t_player *player);
 t_player			*init_player(double pos_x, double pos_y, double dir_x,
 						double dir_y);
 t_ray				*init_ray(t_player *player, t_camera *camera, int x_screen);
-
-void				perform_raycasting(t_player *player, t_map *map);
+void				perform_raycasting(t_player *player, t_map *game);
+//void				perform_raycasting(t_player *player, t_map *map);
 int					key_press(int keycode, t_game *game);
 int					key_release(int keycode, t_game *game);
 int					game_loop(t_game *game);
+void				move(t_game *game);
+
 #endif

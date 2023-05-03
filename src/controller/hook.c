@@ -26,8 +26,6 @@ int	key_press(int keycode, t_game *game)
 		game->key.left = true;
 	else if (keycode == KEY_RIGHT)
 		game->key.right = true;
-	else if (keycode == KEY_ESC)
-		terminate(game);
 	return (0);
 }
 
