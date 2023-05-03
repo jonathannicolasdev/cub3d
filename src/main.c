@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnicolas <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/02 17:04:43 by jnicolas          #+#    #+#             */
+/*   Updated: 2023/05/02 17:04:46 by jnicolas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 #include <math.h>
 #include <string.h>
@@ -56,8 +68,8 @@ int	main(void)
 	game->mlx = mlx;
 	game->win = win_ptr;
 	game->player = player;
-	mlx_hook(game->win, X_EVENT_KEY_PRESS, 0, key_press, info);
-	mlx_hook(info->win, X_EVENT_KEY_RELEASE, 0, key_release, info);
+	mlx_hook(game->win, X_EVENT_KEY_PRESS, 0, key_press, game);
+	mlx_hook(game->win, X_EVENT_KEY_RELEASE, 0, key_release, game);
 	mlx_loop_hook(mlx, game_loop, game);
 	mlx_loop(mlx);
 	return (0);

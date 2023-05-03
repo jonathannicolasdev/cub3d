@@ -22,6 +22,7 @@
 # include <stdbool.h>
 
 # define X_EVENT_KEY_PRESS 2
+# define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT 17
 # define KEY_LEFT				123
 # define KEY_RIGHT				124
@@ -30,6 +31,8 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define move_speed 0.3
+# define rotation_speed 0.5
 
 # define screen_width 640
 # define screen_height 480
@@ -68,14 +71,12 @@ typedef struct s_data
 	t_player		*player;
 }					t_data;
 
-typedef struct s_game
+typedef struct s_map
 {
-	void			*mlx;
-	void			*win;
-	t_player		*player;
-	t_map			*map;
-	t_key			key;
-}	t_game;
+	char			**map;
+	int				width;
+	int				height;
+}					t_map;
 
 typedef struct s_camera
 {
@@ -86,6 +87,16 @@ typedef struct s_camera
 	double			camera_plane_x;
 	double			camera_plane_y;
 }					t_camera;
+
+typedef struct s_game
+{
+	void			*mlx;
+	void			*win;
+	t_player		*player;
+	t_camera		*camera;
+	t_map			*map;
+	t_key			key;
+}	t_game;
 
 typedef struct s_ray
 {
@@ -117,12 +128,7 @@ typedef union u_rgb
 	t_color			rgbs;
 }					t_rgb;
 
-typedef struct s_map
-{
-	char			**map;
-	int				width;
-	int				height;
-}					t_map;
+
 
 t_map				*read_map(char *filename);
 t_camera			*init_camera(t_player *player);
@@ -131,5 +137,7 @@ t_player			*init_player(double pos_x, double pos_y, double dir_x,
 t_ray				*init_ray(t_player *player, t_camera *camera, int x_screen);
 
 void				perform_raycasting(t_player *player, t_map *map);
-
+int					key_press(int keycode, t_game *game);
+int					key_release(int keycode, t_game *game);
+int					game_loop(t_game *game);
 #endif
