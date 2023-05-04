@@ -34,11 +34,23 @@
 # define move_speed 0.03
 # define rotation_speed 0.05
 
+
 # define screen_width 640
 # define screen_height 480
 # define GREEN 0x00FF00
 # define RED 0xFF0000
 # define BLUE 0x0000FF
+
+typedef struct	s_img
+{
+	void		*img;
+	char		*addr;
+	int			width;
+	int			height;
+	int			bpp;
+	int			len;
+	int			endian;
+}	t_img;
 
 typedef struct s_player
 {
@@ -96,6 +108,7 @@ typedef struct s_game
 	t_camera		*camera;
 	t_map			*map;
 	t_key			key;
+	t_img			*img;
 }	t_game;
 
 typedef struct s_ray
@@ -135,7 +148,7 @@ t_camera			*init_camera(t_player *player);
 t_player			*init_player(double pos_x, double pos_y, double dir_x,
 						double dir_y);
 t_ray				*init_ray(t_player *player, t_camera *camera, int x_screen);
-void				perform_raycasting(t_player *player, t_map *game);
+void				perform_raycasting(t_player *player, t_game *game);
 //void				perform_raycasting(t_player *player, t_map *map);
 int					key_press(int keycode, t_game *game);
 int					key_release(int keycode, t_game *game);

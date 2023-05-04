@@ -21,9 +21,9 @@ void	move_vertical(t_game *game, int direction)
 		* move_speed;
 	y = game->player->pos_y + direction * game->player->vector_dir_y
 		* move_speed;
-	if (game->map->map[(int)game->player->pos_y][(int)x] != '1')
+	//if (game->map->map[(int)game->player->pos_y][(int)x] != '1')
 		game->player->pos_x = x;
-	if (game->map->map[(int)y][(int)game->player->pos_x] != '1')
+	//if (game->map->map[(int)y][(int)game->player->pos_x] != '1')
 		game->player->pos_y = y;
 }
 
@@ -36,9 +36,9 @@ void	move_horizontal(t_game *game, int direction)
 		* move_speed;
 	y = game->player->pos_y + direction * game->camera->camera_dir_y
 		* move_speed;
-	if (game->map->map[(int)game->player->pos_y][(int)x] != '1')
+	//if (game->map->map[(int)game->player->pos_y][(int)x] != '1')
 		game->player->pos_x = x;
-	if (game->map->map[(int)y][(int)game->player->pos_x] != '1')
+	//if (game->map->map[(int)y][(int)game->player->pos_x] != '1')
 		game->player->pos_y = y;
 }
 

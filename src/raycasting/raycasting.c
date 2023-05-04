@@ -84,7 +84,7 @@ void	perform_column_raycasting(t_player *player, t_camera *camera,
 	draw_column(x, ray, game->map, game);
 }
 
-void	perform_raycasting(t_player *player, t_map *game)
+void	perform_raycasting(t_player *player, t_game *game)
 {
 	int			x;
 	t_camera	*camera;
