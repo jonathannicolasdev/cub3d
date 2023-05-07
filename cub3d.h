@@ -44,9 +44,10 @@
 typedef struct	s_img
 {
 	void		*img;
+	int			wid;
+	int			hei;
+
 	char		*addr;
-	int			width;
-	int			height;
 	int			bpp;
 	int			len;
 	int			endian;
@@ -108,7 +109,7 @@ typedef struct s_game
 	t_camera		*camera;
 	t_map			*map;
 	t_key			key;
-	t_img			*img;
+	t_img		img;
 }	t_game;
 
 typedef struct s_ray

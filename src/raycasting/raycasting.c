@@ -21,6 +21,7 @@ void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 	int	drawEnd;
 	int	color;
 	int	j;
+	char *dst;
 
 	lineHeight = (int)(screen_height / ray->perpWallDist);
 	drawStart = -lineHeight / 2 + screen_height / 2;
@@ -42,7 +43,11 @@ void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 		color = 0xFFFFFF;
 	j = drawStart;
 	while (j <= drawEnd)
-		mlx_pixel_put(game->mlx, game->win, x, j++, color);
+	{
+		dst = game->img.addr + j * game->img.len + x * (game->img.bpp / 8);
+		*(unsigned int *)dst = color;
+		j++;
+	}
 }
 
 void	perform_dda(t_ray *ray, t_map *map)
