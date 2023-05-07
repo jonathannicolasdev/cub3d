@@ -53,11 +53,11 @@ t_map	*read_map(char *filename)
 
 int	main(void)
 {
-	t_map *map;
-	t_game *game;
-	t_player *player;
-	void *mlx;
-	void *win_ptr;
+	t_map		*map;
+	t_game		*game;
+	t_player	*player;
+	void		*mlx;
+	void		*win_ptr;
 
 	map = read_map("");
 	mlx = mlx_init();
@@ -68,11 +68,9 @@ int	main(void)
 	game->mlx = mlx;
 	game->win = win_ptr;
 	game->player = player;
-	//game->key.w=true; // init other keys to false
-
 	game->img.img = mlx_new_image(game->mlx, screen_width, screen_height);
-	game->img.addr = mlx_get_data_addr(game->img.img, &(game->img.bpp), &(game->img.len), &(game->img.endian));
-	printf("image props: %d %d %d\n",game->img.bpp,game->img.len,game->img.endian);
+	game->img.addr = mlx_get_data_addr(game->img.img, &(game->img.bpp), \
+	&(game->img.len), &(game->img.endian));
 	mlx_hook(game->win, X_EVENT_KEY_PRESS, 0, key_press, game);
 	mlx_hook(game->win, X_EVENT_KEY_RELEASE, 0, key_release, game);
 	mlx_loop_hook(mlx, game_loop, game);

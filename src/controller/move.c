@@ -62,18 +62,42 @@ void	rotate(t_player *player, t_camera *camera, int direction)
 			* rotation_speed);
 }
 
-void	move(t_game *game)
+int	move(t_game *game)
 {
 	if (game->key.w == true)
+	{
+		printf("key is w %f %f\n", game->player->pos_x, game->player->pos_y);
 		move_vertical(game, 1);
+		return (1);
+	}
 	else if (game->key.s == true)
+	{
+		printf("key is s %f %f\n", game->player->pos_x, game->player->pos_y);
 		move_vertical(game, -1);
+		return (1);
+	}
 	else if (game->key.a == true)
+	{	
 		move_horizontal(game, -1);
+		return (1);
+	}
 	else if (game->key.d == true)
+	{	
 		move_horizontal(game, 1);
+		return (1);
+	}
 	else if (game->key.left == true)
+	{
 		rotate(game->player, game->camera, -1);
+		return (1);
+	}
 	else if (game->key.right == true)
+	{
 		rotate(game->player, game->camera, 1);
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
