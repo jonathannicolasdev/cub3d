@@ -14,14 +14,13 @@
 
 #include "../../cub3d.h"
 
-void	draw_background(t_game	*game)
+void	draw_background(t_game *game)
 {
 	char	*dst;
 	int		i;
 	int		j;
 
 	i = 0;
-	
 	while (i < screen_width)
 	{
 		j = 0;
@@ -33,22 +32,7 @@ void	draw_background(t_game	*game)
 		}
 		i++;
 	}
-
 }
-/*
-void draw_background(t_game *game)
-{
-	char *dst;
-	for (int x = 0; x < screen_width; x++)
-	{
-		for (int j = 0; j < screen_height; j++)
-		{
-			dst = game->img.addr + j * game->img.len + x * (game->img.bpp / 8);
-			*(unsigned int *)dst = BLACK;
-		}
-	}
-}
-*/
 
 void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 {
@@ -115,7 +99,7 @@ void	perform_dda(t_ray *ray, t_map *map)
 		ray->perpWallDist = (ray->side_dist_y - ray->delta_dist_y);
 }
 
-void	perform_column_raycasting(t_player *player, t_camera *camera, 
+void	perform_column_raycasting(t_player *player, t_camera *camera,
 		t_game *game, int x)
 {
 	t_ray	*ray;

@@ -31,6 +31,7 @@ void	move_horizontal(t_game *game, int direction)
 {
 	double	x;
 	double	y;
+	printf("hello");
 
 	x = game->player->pos_x + direction * game->camera->camera_dir_x
 		* move_speed;
@@ -66,18 +67,19 @@ int	move(t_game *game)
 {
 	if (game->key.w == true)
 	{
-		printf("key is w %f %f\n", game->player->pos_x, game->player->pos_y);
+		//printf("key is w %f %f\n", game->player->pos_x, game->player->pos_y);
 		move_vertical(game, 1);
 		return (1);
 	}
 	else if (game->key.s == true)
 	{
-		printf("key is s %f %f\n", game->player->pos_x, game->player->pos_y);
+		//printf("key is s %f %f\n", game->player->pos_x, game->player->pos_y);
 		move_vertical(game, -1);
 		return (1);
 	}
 	else if (game->key.a == true)
 	{	
+		printf("key is a %f %f\n", game->player->pos_x, game->player->pos_y);
 		move_horizontal(game, -1);
 		return (1);
 	}

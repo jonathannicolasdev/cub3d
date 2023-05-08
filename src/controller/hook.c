@@ -17,7 +17,9 @@ int	key_press(int keycode, t_game *game)
 	if (keycode == KEY_W)
 		game->key.w = true;
 	else if (keycode == KEY_A)
+	{
 		game->key.a = true;
+	}
 	else if (keycode == KEY_S)
 		game->key.s = true;
 	else if (keycode == KEY_D)
