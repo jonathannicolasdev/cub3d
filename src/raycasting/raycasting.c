@@ -113,6 +113,7 @@ void	perform_raycasting(t_player *player, t_game *game)
 {
 	int			x;
 	t_camera	*camera;
+	printf("before fail\n");
 
 	camera = init_camera(player);
 	x = 0;

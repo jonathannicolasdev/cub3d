@@ -31,12 +31,16 @@ void	move_horizontal(t_game *game, int direction)
 {
 	double	x;
 	double	y;
-	printf("hello");
+	printf("before update horizontal\n");
 
-	x = game->player->pos_x + direction * game->camera->camera_dir_x
+	x = game->player->pos_x + direction * game->player->vector_dir_y//game->camera->camera_dir_x
 		* move_speed;
-	y = game->player->pos_y + direction * game->camera->camera_dir_y
+	printf("player posx %f camera dirx %f\n", game->player->pos_x, game->camera->camera_dir_x);
+
+	y = game->player->pos_y - direction * game->player->vector_dir_x//* game->camera->camera_dir_y
 		* move_speed;
+	printf("before update y\n");
+
 	//if (game->map->map[(int)game->player->pos_y][(int)x] != '1')
 		game->player->pos_x = x;
 	//if (game->map->map[(int)y][(int)game->player->pos_x] != '1')

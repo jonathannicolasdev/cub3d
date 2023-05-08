@@ -18,6 +18,7 @@ t_map	*read_map(char *filename)
 {
 	t_map	*m;
 	int		i;
+	(void)filename;
 
 	m = malloc(sizeof(t_map));
 	m->width = 24;
@@ -58,6 +59,7 @@ int	main(void)
 	t_player	*player;
 	void		*mlx;
 	void		*win_ptr;
+
 
 	map = read_map("");
 	mlx = mlx_init();

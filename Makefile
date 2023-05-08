@@ -19,6 +19,8 @@ FLAGS = -Wall -Wextra -Werror -g
 LINKS = -framework OpenGL -framework AppKit
 #MLB_FLAGS	= -I -g -L /usr/X11/lib -L./mlbx -lmlx -Imlx -lXext -lX11 -lz -lm
 
+%.o : %.c
+	$(CC) $(FLAGS) -o $@ -c $<
 
 NONE='\033[0m'
 GREEN='\033[32m'
