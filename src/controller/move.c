@@ -22,24 +22,24 @@ void	move_vertical(t_game *game, int direction)
 	y = game->player->pos_y + direction * game->player->vector_dir_y
 		* move_speed;
 	//if (game->map->map[(int)game->player->pos_y][(int)x] != '1')
-		game->player->pos_x = x;
+	game->player->pos_x = x;
 	//if (game->map->map[(int)y][(int)game->player->pos_x] != '1')
-		game->player->pos_y = y;
+	game->player->pos_y = y;
 }
 
 void	move_horizontal(t_game *game, int direction)
 {
 	double	x;
 	double	y;
-	printf("before update horizontal\n");
+	//printf("before update horizontal\n");
 
 	x = game->player->pos_x + direction * game->player->vector_dir_y//game->camera->camera_dir_x
 		* move_speed;
-	printf("player posx %f camera dirx %f\n", game->player->pos_x, game->camera->camera_dir_x);
+	//printf("player posx %f camera dirx %f\n", game->player->pos_x, game->camera->camera_dir_x);
 
 	y = game->player->pos_y - direction * game->player->vector_dir_x//* game->camera->camera_dir_y
 		* move_speed;
-	printf("before update y\n");
+	//printf("before update y\n");
 
 	//if (game->map->map[(int)game->player->pos_y][(int)x] != '1')
 		game->player->pos_x = x;
@@ -47,11 +47,15 @@ void	move_horizontal(t_game *game, int direction)
 		game->player->pos_y = y;
 }
 
-void	rotate(t_player *player, t_camera *camera, int direction)
+void	rotate(t_player *player, int direction)
 {
-	double	vector_dir_x_old;
-	double	camera_plane_x_old;
+	double		vector_dir_x_old;
+	double		camera_plane_x_old;
+	t_camera	*camera;
 
+	reset_camera(player);
+	printf("before it segs");
+	camera = player->camera;
 	vector_dir_x_old = player->vector_dir_x;
 	player->vector_dir_x = player->vector_dir_x * cos(direction
 			* rotation_speed) - player->vector_dir_y * sin(direction
@@ -94,12 +98,12 @@ int	move(t_game *game)
 	}
 	else if (game->key.left == true)
 	{
-		rotate(game->player, game->camera, -1);
+		rotate(game->player, -1);
 		return (1);
 	}
 	else if (game->key.right == true)
 	{
-		rotate(game->player, game->camera, 1);
+		rotate(game->player, 1);
 		return (1);
 	}
 	else

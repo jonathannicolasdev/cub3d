@@ -33,7 +33,18 @@ t_camera	*init_camera(t_player *player)
 		return (NULL);
 	camera->camera_plane_x = player->vector_dir_y * 0.66;
 	camera->camera_plane_y = -(player->vector_dir_x * 0.66);
+	//camera->camera_dir_x = player->vector_dir_y;
+	//camera->camera_dir_y = -player->vector_dir_x;
 	return (camera);
+}
+
+void	reset_camera(t_player *player)
+{
+	t_camera	*camera;
+
+	camera = player->camera;
+	camera->camera_plane_x = player->vector_dir_y * 0.66;
+	camera->camera_plane_y = -(player->vector_dir_x * 0.66);
 }
 
 t_ray	*init_ray(t_player *player, t_camera *camera, int x_screen)

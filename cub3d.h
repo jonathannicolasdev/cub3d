@@ -51,12 +51,23 @@ typedef struct s_img
 	int				endian;
 }					t_img;
 
+typedef struct s_camera
+{
+	double			camera_x;
+	double			camera_y;
+	double			camera_dir_x;
+	double			camera_dir_y;
+	double			camera_plane_x;
+	double			camera_plane_y;
+}					t_camera;
+
 typedef struct s_player
 {
 	double			vector_dir_x;
 	double			vector_dir_y;
 	double			pos_x;
 	double			pos_y;
+	t_camera		*camera;
 }					t_player;
 
 typedef struct s_key
@@ -76,15 +87,7 @@ typedef struct s_map
 	int				height;
 }					t_map;
 
-typedef struct s_camera
-{
-	double			camera_x;
-	double			camera_y;
-	double			camera_dir_x;
-	double			camera_dir_y;
-	double			camera_plane_x;
-	double			camera_plane_y;
-}					t_camera;
+
 
 typedef struct s_game
 {
@@ -132,4 +135,5 @@ int					key_release(int keycode, t_game *game);
 int					move(t_game *game);
 void				draw_background(t_game	*game);
 int					game_loop(t_game *game);
+void				reset_camera(t_player *player);
 #endif
