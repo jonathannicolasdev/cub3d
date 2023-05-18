@@ -52,6 +52,17 @@ t_map	*read_map(char *filename)
 	return (m);
 }
 
+int	init_key_press(t_game *game)
+{
+	game->key.w = false;
+	game->key.a = false;
+	game->key.s = false;
+	game->key.d = false;
+	game->key.left = false;
+	game->key.right = false;
+	return (0);
+}
+
 int	main(void)
 {
 	t_map		*map;
@@ -65,6 +76,7 @@ int	main(void)
 	mlx = mlx_init();
 	win_ptr = mlx_new_window(mlx, screen_width, screen_height, "cub3d");
 	player = init_player(10, 12, -1, 0);
+	player->camera=init_camera(player);
 	game = malloc(sizeof(t_game));
 	game->map = map;
 	game->mlx = mlx;
@@ -73,6 +85,7 @@ int	main(void)
 	game->img.img = mlx_new_image(game->mlx, screen_width, screen_height);
 	game->img.addr = mlx_get_data_addr(game->img.img, &(game->img.bpp), \
 	&(game->img.len), &(game->img.endian));
+	init_key_press(game);
 	mlx_hook(game->win, X_EVENT_KEY_PRESS, 0, key_press, game);
 	mlx_hook(game->win, X_EVENT_KEY_RELEASE, 0, key_release, game);
 	mlx_loop_hook(mlx, game_loop, game);
