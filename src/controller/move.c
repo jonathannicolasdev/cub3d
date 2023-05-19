@@ -79,7 +79,7 @@ void	rotate_right(t_player *player)
 	double		camera_plane_x_old;
 	t_camera	*camera;
 
-	reset_camera(player);
+	//reset_camera(player);
 	printf("before it segs");
 	camera = player->camera;
 	vector_dir_x_old = player->vector_dir_x;
@@ -100,21 +100,20 @@ void	rotate_left(t_player *player)
 	double		camera_plane_x_old;
 	t_camera	*camera;
 
-	reset_camera(player);
+	//reset_camera(player);
 	printf("before it segs");
 	camera = player->camera;
 	vector_dir_x_old = player->vector_dir_x;
-	player->vector_dir_x = player->vector_dir_x * cos(-rotation_speed)
-		- player->vector_dir_y * sin(-rotation_speed);
-	player->vector_dir_y = vector_dir_x_old * sin(-rotation_speed)
-		+ player->vector_dir_y * cos(-rotation_speed);
+	player->vector_dir_x = player->vector_dir_x * cos(rotation_speed)
+		- player->vector_dir_y * sin(rotation_speed);
+	player->vector_dir_y = vector_dir_x_old * sin(rotation_speed)
+		+ player->vector_dir_y * cos(rotation_speed);
 	camera_plane_x_old = camera->camera_plane_x;
-	camera->camera_plane_x = camera->camera_plane_x * cos(-rotation_speed)
-		- camera->camera_plane_y * sin(-rotation_speed);
-	camera->camera_plane_y = camera_plane_x_old * sin(-rotation_speed)
-		+ camera->camera_plane_y * cos(-rotation_speed);
+	camera->camera_plane_x = camera->camera_plane_x * cos(rotation_speed)
+		- camera->camera_plane_y * sin(rotation_speed);
+	camera->camera_plane_y = camera_plane_x_old * sin(rotation_speed)
+		+ camera->camera_plane_y * cos(rotation_speed);
 }
-
 
 int	move(t_game *game)
 {
