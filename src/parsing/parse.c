@@ -147,8 +147,8 @@ int ft_parse(char **argv, t_map **map)
         tab = ft_free_tab(tab);
         return (FAIL);
     }
-    (void)map; // Variable 'map' is intentionally unused
-    /*
+ //   (void)map; // Variable 'map' is intentionally unused
+    
     *map = malloc(sizeof(t_map));
     if (!(*map))
     {
@@ -156,11 +156,12 @@ int ft_parse(char **argv, t_map **map)
         tab = ft_free_tab(tab);
         return (FAIL);
     }
-    (*map)->map = data->map; */
-    //ft_all_data(data);
-    //print_map(data->map);
-    tab = ft_free_tab(tab);
-    ft_free_data(data);
+    (*map)->map = data->map; 
+    ft_all_data(data);
+	tab = ft_free_tab(tab);
+    print_map(data->map);
+   // tab = ft_free_tab(tab);
+  //  ft_free_data(data);
     //free(data);
     return (SUCCESS);
 }

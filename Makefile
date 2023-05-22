@@ -43,6 +43,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(GNL_OBJS)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
 	@make -C ${LIBFTPATH}
+	@cd minilibx_opengl && make
 	@gcc $(FLAGS) $(OBJS) $(GNL_OBJS) ./libft/libft.a ./minilibx_opengl/libmlx.a $(LINKS) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 	@rm $(OBJS)

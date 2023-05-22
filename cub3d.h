@@ -23,6 +23,8 @@
 
 /*	----- PARSING DEFINE INCLUDE ----- */
 # include "src/parsing/get_next_line/get_next_line.h"
+# include <unistd.h>
+# include <fcntl.h>
 # define NORTH 'N'
 # define SOUTH 'S'
 # define WEST 'W'

@@ -63,7 +63,7 @@ int	init_key_press(t_game *game)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_map		*map;
 	t_game		*game;
@@ -71,11 +71,27 @@ int	main(void)
 	void		*mlx;
 	void		*win_ptr;
 
+	if (argc == 1)
+	{
+		printf("Error! *main return*\n");
+		return (1);
+	}
+	if (ft_parse(argv, &map) != 0)
+	{
+		printf("Error! *main return*\n");
+		return (1);
+	}
+	getPositionOfN(map);
+	//print_map(map->map);
+	printf("Position of 'NWSE': (%f, %f)\n", map->x, map->y);
+//	map = read_map("");
 
-	map = read_map("");
+//	double x, y;
+//	x = (double)map->x;
+//	y = (double)map->y;
 	mlx = mlx_init();
 	win_ptr = mlx_new_window(mlx, screen_width, screen_height, "cub3d");
-	player = init_player(10, 12, -1, 0);
+	player = init_player(map->y, map->x, -1, 0);
 	player->camera=init_camera(player);
 	game = malloc(sizeof(t_game));
 	game->map = map;
