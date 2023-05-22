@@ -21,6 +21,20 @@
 # include <stdlib.h>
 # include <string.h>
 
+/*	----- PARSING DEFINE INCLUDE ----- */
+# include "src/parsing/get_next_line/get_next_line.h"
+# define NORTH 'N'
+# define SOUTH 'S'
+# define WEST 'W'
+# define EAST 'E'
+# define BUFFER_SIZE 4096
+# define SUCCESS 0
+# define FAIL 1
+# define FAIL_FD -1
+# define FAIL_CUB -2
+/*	----- PARSING DEFINE INCLUDE END ----- */
+
+
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
 # define X_EVENT_KEY_EXIT 17
@@ -80,14 +94,27 @@ typedef struct s_key
 	bool			right;
 }					t_key;
 
+/*
 typedef struct s_map
 {
 	char			**map;
 	int				width;
 	int				height;
 }					t_map;
+*/
 
-
+/*	----- PARSING STRUCT MODIFY MAP ----- */
+typedef struct s_map
+{
+	    int rows;
+    int columns;
+	char			**map;
+	int				width;
+	int				height;
+    float x;
+    float y;
+}					t_map;
+/*	----- PARSING STRUCT MODIFY MAP END ----- */
 
 typedef struct s_game
 {
@@ -123,6 +150,100 @@ typedef struct s_color
 	unsigned char	red;
 	unsigned char	blank;
 }					t_color;
+
+/*	----- PARSING STRUCT ----- */
+typedef struct	s_parse
+{
+	int north;
+	int south;
+	int west;
+	int east;
+	int floor;
+	int ceiling;
+	int map_wg_char;
+	int map_end;
+	int map_wall;
+	int map_dup;
+	int map_no_pos;
+	int no_map;
+	int wrong_line;
+
+}				t_parse;
+
+typedef struct	s_data
+{
+	int		x;
+	int		y;
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*floor;
+	char	*ceiling;
+	char	**map;
+}				t_data;
+/*	----- PARSING STRUCT END ----- */
+/*	----- PARSING ----- */
+/*	--- parse.c --- Obligatoire */
+int 	ft_parse(char **argv, t_map **map);
+int 	ft_parse_file(char *filename, char ***tab_ptr);
+int		ft_parsing(char **tab);
+t_parse	*ft_parse_map(char **map, t_parse *parse, int i, int dup);
+t_parse	*ft_parse_map_continue(t_parse *parse, int dup, char *str);
+
+/*	--- init_free.c --- Obligatoire */
+t_parse	*init_struct(t_parse *parse);
+char	**ft_free_tab(char **tab);
+t_data	*ft_free_data(t_data *data);
+
+/*	--- cub.c --- Obligatoire */
+int		ft_cub(char *argv);
+int		ft_fd_cub(char *file);
+
+/*	--- map.c --- Obligatoire */
+int		check_orientation(char *str);
+int		is_non_map_char(char c);
+int		ft_unwanted_character(char *str);
+int		ft_wall(char *str);
+int		ft_is_a_wall_around(char *str);
+
+/*	--- add.c --- Obligatoire à modifier */
+t_data	*ft_add_to_data(t_data *data, char **tab, int i);
+char	**ft_add_to_map(char **tab);
+char	**ft_add_value_to_data(char **tab, t_parse *parse, char **data, int i);
+
+/*	--- error.c --- Obligatoire à modifier */
+int		tinder(char *str);
+int		ft_error(t_parse *parse);
+t_parse	*get_error(t_parse *parse, char **tab, int i);
+t_parse	*check_error(char **data, t_parse *parse);
+void	print_error(t_parse *parse);
+
+/*	--- other.c --- Obligatoire à modifier */
+void	getPositionOfN(t_map *map);
+int		is_double(int a);
+int		check_file_readability(char *str, int i);
+int		validate_color_string(char *str, int i);
+int		validate_rgb_color(char *str, int i);
+int		check_string_position(char *s1, char *s, char *s2);
+int		get_screen_resolution(char *str, char c);
+int		ft_space(char *str);
+
+/*	--- other_libft.c --- Obligatoire à modifier */
+int		ft_pstrlen(char *str, char c);
+char	*ft_pstrjoin(char *s1, char *s2);
+char 	*ft_pstrdup(char *buffer, char c);
+int		check_new_line(char *str, char c);
+char	*ft_pstrcut(char *buffer, char c);
+void    ft_pputchar(char c);
+void    ft_pputstr(char *str);
+int		ft_patoi(char *str);
+
+/*	--- test_print.c --- On peu supprimer à la fin du projet - Ne pas norminette */
+void    ft_all_data(t_data *data);
+void	print_map(char **map);
+void    ft_all_parse(t_parse *parse);
+/*	----- PARSING END ----- */
 
 t_map				*read_map(char *filename);
 t_camera			*init_camera(t_player *player);

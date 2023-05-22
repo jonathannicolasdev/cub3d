@@ -3,7 +3,18 @@ LIBFTNAME = libft.a
 LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
-SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c
+SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c \
+		parsing/add.c \
+		parsing/cub.c \
+		parsing/error.c \
+		parsing/init_free.c \
+		parsing/map.c \
+		parsing/other_libft.c \
+		parsing/other.c \
+		parsing/parse.c \
+		parsing/test_print.c \
+		parsing/get_next_line/get_next_line.c \
+		parsing/get_next_line/get_next_line_utils.c
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 
