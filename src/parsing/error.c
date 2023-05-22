@@ -19,9 +19,7 @@ int	tinder(char *str)
 	i = 0;
 	if (str && str[i])
 	{
-		if (str[i] == 'R' && str[i + 1] == ' ')
-			return (1);
-		else if (str[i] == 'N' && str[i + 1] == 'O')
+		if (str[i] == 'N' && str[i + 1] == 'O')
 			return (2);
 		else if (str[i] == 'S' && str[i + 1] == 'O')
 			return (3);

@@ -135,23 +135,6 @@ int check_string_position(char *s1, char *s, char *s2)
     return 0;
 }
 
-
-int	get_screen_resolution(char *str, char c)
-{
-	int	i;
-
-	i = 2;
-	if (c == 'y')
-	{
-		while (str && str[i] && str[i] >= '0' && str[i] <= '9')
-		{
-			i++;
-		}
-		i++;
-	}
-	return (ft_patoi(str + i));
-}
-
 int	ft_space(char *str)
 {
 	char	*ptr = str;

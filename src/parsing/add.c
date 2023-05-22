@@ -53,11 +53,6 @@ t_data	*ft_add_to_data(t_data *data, char **tab, int i)
 {
 	while (tab && tab[i])
 	{
-		if (tinder(tab[i]) == 1)
-		{
-			data->x = get_screen_resolution(tab[i], 'x');
-			data->y = get_screen_resolution(tab[i], 'y');
-		}
 		if (tinder(tab[i]) == 2)
 		{
 			data->north = ft_pstrdup(tab[i] + 3, '\0');

@@ -83,7 +83,7 @@ int	ft_parsing(char **tab)
 	print_error(parse);
 	map = ft_free_tab(map);
 	data = ft_free_tab(data);
-	//ft_all_parse(parse); 	// sdkjgslgdklshfglsdlgksh sdlkghdlskghdlkshgklsdhghsglksdhlgk
+	ft_all_parse(parse); 	// sdkjgslgdklshfglsdlgksh sdlkghdlskghdlkshgklsdhghsglksdhlgk
 	if (ft_error(parse) == 1)
 	{
 		free(parse);

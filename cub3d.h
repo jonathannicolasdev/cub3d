@@ -174,8 +174,6 @@ typedef struct	s_parse
 
 typedef struct	s_data
 {
-	int		x;
-	int		y;
 	char	*north;
 	char	*south;
 	char	*west;
@@ -228,7 +226,6 @@ int		check_file_readability(char *str, int i);
 int		validate_color_string(char *str, int i);
 int		validate_rgb_color(char *str, int i);
 int		check_string_position(char *s1, char *s, char *s2);
-int		get_screen_resolution(char *str, char c);
 int		ft_space(char *str);
 
 /*	--- other_libft.c --- Obligatoire à modifier */

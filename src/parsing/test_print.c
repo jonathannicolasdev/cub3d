@@ -3,8 +3,6 @@
 void    ft_all_data(t_data *data)
 {
     printf("\nTous ce que data contient:\n");
-    printf("data->x = %d\n", data->x);
-    printf("data->y = %d\n", data->y);
     printf("data->north = %s\n", data->north);
     printf("data->south = %s\n", data->south);
     printf("data->west = %s\n", data->west);
