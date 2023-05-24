@@ -22,7 +22,7 @@
 # include <string.h>
 
 /*	----- PARSING DEFINE INCLUDE ----- */
-# include "src/parsing/get_next_line/get_next_line.h"
+# include "get_next_line/get_next_line.h"
 # include <unistd.h>
 # include <fcntl.h>
 # define NORTH 'N'
@@ -189,12 +189,6 @@ typedef struct	s_data
 }				t_data;
 /*	----- PARSING STRUCT END ----- */
 /*	----- PARSING ----- */
-/*	--- parse.c --- Obligatoire */
-int ft_parse(char **argv, t_map **map);
-int 	ft_parse_file(char *filename, char ***tab_ptr);
-int		ft_parsing(char **tab);
-t_parse	*ft_parse_map(char **map, t_parse *parse, int i, int dup);
-t_parse	*ft_parse_map_continue(t_parse *parse, int dup, char *str);
 
 /*	--- init_free.c --- Obligatoire */
 t_parse	*init_struct(t_parse *parse);
@@ -230,18 +224,7 @@ int		is_double(int a);
 int		check_file_readability(char *str, int i);
 int		validate_color_string(char *str, int i);
 int		validate_rgb_color(char *str, int i);
-int		check_string_position(char *s1, char *s, char *s2);
 int		ft_space(char *str);
-
-/*	--- other_libft.c --- Obligatoire à modifier */
-int		ft_pstrlen(char *str, char c);
-char	*ft_pstrjoin(char *s1, char *s2);
-char 	*ft_pstrdup(char *buffer, char c);
-int		check_new_line(char *str, char c);
-char	*ft_pstrcut(char *buffer, char c);
-void    ft_pputchar(char c);
-void    ft_pputstr(char *str);
-int		ft_patoi(char *str);
 
 /*	--- test_print.c --- On peu supprimer à la fin du projet - Ne pas norminette */
 void    ft_all_data(t_data *data);
@@ -273,4 +256,27 @@ int					move(t_game *game);
 void				draw_background(t_game	*game);
 int					game_loop(t_game *game);
 void				reset_camera(t_player *player);
+
+/*	--- parse.c --- */
+int		ft_parse_file(char *filename, char ***tab_ptr);
+int		parse_file_and_tab(char *filename, char ***tab);
+t_data	*create_data_from_tab(char **tab);
+t_map	*create_map_from_data(t_data *data);
+int		ft_parse(char **argv, t_map **map);
+
+/* --- parsing.c --- */
+int		ft_parsing_second(t_parse *parse, char **data, char **map);
+int		ft_parsing(char **tab);
+
+/* --- map.c --- */
+t_parse	*ft_map(t_parse *parse, char **map);
+void	ft_map_check(t_parse *parse, char **map, int actual, int y);
+
+/* --- map_check.c --- */
+int	ft_map_total_position(char **map);
+int	ft_map_zero(char **map, int actual, int i, int y);
+int	ft_map_char(char **map, int actual, int i);
+int	ft_map_player(char **map, int actual, int i, int y);
+int	ft_map_space(char **map, int actual, int i, int y);
+
 #endif

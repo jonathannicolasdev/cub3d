@@ -9,16 +9,17 @@ SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/ga
 		parsing/error.c \
 		parsing/init_free.c \
 		parsing/map.c \
-		parsing/other_libft.c \
+		parsing/map_check.c \
 		parsing/other.c \
+		parsing/color_and_texture.c \
 		parsing/test_print.c \
-		parsing/get_next_line/get_next_line.c \
-		parsing/get_next_line/get_next_line_utils.c
+		parsing/parse.c \
+		parsing/parsing.c 
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 
 # /* ~~~~~~~ INCLUDING GNL ~~~~~~~ */
-GNL_DIR = ./gnl/
+GNL_DIR = ./get_next_line/
 GNL = get_next_line.c \
 	get_next_line_utils.c \
 
@@ -55,7 +56,7 @@ exe: all
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(GNL_OBJS)
 
 fclean: clean
 	@echo $(CURSIVE)$(GRAY) "     - Removing $(NAME)..." $(NONE)

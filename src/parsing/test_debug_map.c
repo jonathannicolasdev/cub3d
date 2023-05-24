@@ -101,3 +101,39 @@ int	ft_map_char_error(char **map, int actual, int i)
 	}
 	return (0);
 }
+
+int	ft_map_wall_error(char **map, int actual, int i, int y)
+{
+	if (map[actual][i] == '1')
+	{
+		if (map[actual][i + 1] != ' ' && map[actual][i + 1] != '1' && map[actual][i + 1] != '\0')
+		{
+			if (map[actual][i + 1] != '0' && map[actual][i + 1] != 'N' && map[actual][i + 1] != 'S' && map[actual][i + 1] != 'E' && map[actual][i + 1] != 'W')
+			{
+				printf("Erreur! Mur manquant à droite du vide. Le résultat : map[actual][i + 1] = [%c] et debug x [%d] y [%d]\n", map[actual][i + 1], actual, i + 1);
+			}
+		}
+		if (i - 1 > -1 && map[actual][i - 1] != ' ' && map[actual][i - 1] != '1' && map[actual][i - 1] != '\0')
+		{
+			if (map[actual][i - 1] != '0' && map[actual][i - 1] != 'N' && map[actual][i - 1] != 'S' && map[actual][i - 1] != 'E' && map[actual][i - 1] != 'W')
+			{
+				printf("Erreur! Mur manquant à gauche du vide. Le résultat : map[actual][i - 1] = [%c] et debug x [%d] y [%d]\n", map[actual][i - 1], actual, i - 1);
+			}
+		}
+		if (actual + 1 != y && map[actual + 1][i] != ' ' && map[actual + 1][i] != '1' && map[actual + 1][i] != '\0')
+		{
+			if (map[actual + 1][i] != '0' && map[actual + 1][i] != 'N' && map[actual + 1][i] != 'S' && map[actual + 1][i] != 'E' && map[actual + 1][i] != 'W')
+			{
+				printf("Erreur! Mur manquant sur la ligne suivante du vide. Le résultat : map[actual + 1][i] = [%c] et debug x [%d] y [%d]\n", map[actual + 1][i], actual + 1, i);
+			}
+		}
+		if (actual != 0  && map[actual - 1][i] != ' ' && map[actual - 1][i] != '1' && map[actual - 1][i] != '\0')
+		{
+			if (map[actual - 1][i] != '0' && map[actual - 1][i] != 'N' && map[actual - 1][i] != 'S' && map[actual - 1][i] != 'E' && map[actual - 1][i] != 'W')
+			{
+				printf("Erreur ! Mur manquant sur la ligne avant du vide. Le résultat : map[actual - 1][i] = [%c] et debug x [%d] y [%d]\n", map[actual - 1][i], actual - 1, i);
+			}
+		}
+	}
+	return (0);
+}

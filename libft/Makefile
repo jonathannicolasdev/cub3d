@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jnicolas <jnicolas@student.42quebec>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/10/17 17:25:43 by jnicolas          #+#    #+#              #
-#    Updated: 2021/11/09 14:34:14 by jnicolas         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 SRCS = ft_isalpha.c \
 	   ft_isdigit.c \
 	   ft_isalnum.c \
@@ -44,26 +32,33 @@ SRCS = ft_isalpha.c \
 	   ft_putstr_fd.c \
 	   ft_putendl_fd.c \
 	   ft_putnbr_fd.c \
-	  
-OBJS = $(SRCS:.c=.o)
+	   ft_strcut.c \
+	   ft_pstrdup.c
+
+OBJS = $(addprefix obj/, $(SRCS:.c=.o))
 
 NAME = libft.a
 
-CC = gcc
+CC = @gcc
 
 CFLAGS = -Werror -Wextra -Wall
 
-$(NAME): $(OBJS)
-	${CC} ${CFLAGS} -c ${SRCS}
-	ar rc $(NAME) $(OBJS)
+$(NAME): obj $(OBJS)
+	@ar rc $(NAME) $(OBJS)
 
 all:	${NAME}
 
+obj:
+	@mkdir -p obj
+
+obj/%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean :
-	rm -f $(OBJS)
+	@rm -rf obj
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

@@ -39,3 +39,49 @@ void    ft_all_parse(t_parse *parse)
     printf("parse->no_map = %d\n", parse->no_map);
     printf("parse->wrong_line = %d\n\n", parse->wrong_line);
 }
+
+void getPositionOfN(t_map *map) {
+    int rows = 1;
+    int columns = 1;
+    int x = -1;
+    int y = -1;
+
+    while (map->map[rows] != NULL) {
+        int currentColumns = 0;
+        while (map->map[rows][currentColumns] != '\0') {
+            currentColumns++;
+        }
+        if (currentColumns > columns) {
+            columns = currentColumns;
+        }
+        rows++;
+    }
+
+	int i = 1;
+	while (i < rows)
+	{
+    	int currentColumns = 0;
+    	while (map->map[i][currentColumns] != '\0') 
+		{
+        	if (map->map[i][currentColumns] == 'N' || map->map[i][currentColumns] == 'S' ||
+				map->map[i][currentColumns] == 'W' || map->map[i][currentColumns] == 'E' )
+			{
+            	x = currentColumns;
+        		y = i;
+            	break;
+        	}
+     		currentColumns++;
+    	}
+    	if (x != -1 && y != -1) {
+    		break;
+    	}
+    	i++;
+	}
+
+double centerX = x + 0.5;
+double centerY = y + 0.5;
+
+map->x = centerX;
+map->y = centerY;
+
+}
