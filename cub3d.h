@@ -169,6 +169,11 @@ typedef struct	s_parse
 	int map_no_pos;
 	int no_map;
 	int wrong_line;
+	int	map_wg_player;
+	int	map_wg_player_number;
+	int	map_wg_space;
+	int map_wg_zero;
+	int	map_wg_character;
 
 }				t_parse;
 
@@ -242,6 +247,18 @@ int		ft_patoi(char *str);
 void    ft_all_data(t_data *data);
 void	print_map(char **map);
 void    ft_all_parse(t_parse *parse);
+
+
+
+/*	--- map.c --- Obligatoire nouvelle version */
+t_parse	*ft_map(t_parse *parse, char **map);
+int		ft_map_total_position(char **map);
+int		ft_map_zero(char **map, int actual, int i, int y);
+int		ft_map_char(char **map, int actual, int i);
+int		ft_map_player(char **map, int actual, int i, int y);
+int		ft_map_space(char **map, int actual, int i, int y);
+
+
 /*	----- PARSING END ----- */
 
 t_map				*read_map(char *filename);

@@ -47,6 +47,12 @@ int	ft_error(t_parse *parse)
 	{
 		return (1);
 	}
+	if (parse->map_wg_player != 0 || parse->map_wg_player_number != 0 || parse->map_wg_space != 0
+		|| parse->map_wg_zero != 0 || parse->map_wg_character != 0)
+	{
+		printf("La map cause problème mon pote.\n");
+		return (1);
+	}
 	return (0);
 }
 
@@ -95,16 +101,4 @@ t_parse	*check_error(char **data, t_parse *parse)
 		i++;
 	}
 	return (parse);
-}
-
-void	print_error(t_parse *parse)
-{
-	if (parse->north != 1 || parse->south != 1 || parse->west != 1
-		|| parse->east != 1 || parse->floor != 1 || parse->ceiling != 1
-		|| parse->map_wg_char == 1 || parse->map_end == 1
-		|| parse->map_wall == 1 || parse->map_dup == 1 || parse->map_no_pos == 1
-		|| parse->no_map == 1 || parse->wrong_line == 1)
-	{
-		ft_pputstr("Error!\n");
-	}
 }

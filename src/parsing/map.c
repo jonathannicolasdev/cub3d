@@ -1,86 +1,131 @@
 #include "../../cub3d.h"
 
-int	check_orientation(char *str)
+int	ft_map_space(char **map, int actual, int i, int y)
 {
-	int		number;
-	char	c;
-
-	number = 0;
-	while ((c = *str++))
+	if (map[actual][i] == ' ')
 	{
-		if (c == NORTH || c == SOUTH || c == EAST || c == WEST)
-			number++;
-	}
-	return (number);
-}
-
-int	is_non_map_char(char c)
-{
-	if (c != '\0' && c != '1' && c != '2' && c != '0' && c != ' ')
-	{
-		return (1);
-	}
-	return (0);
-}
-
-int	ft_unwanted_character(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] && str[i] != '1' && str[i] != '0' && str[i] != 'N' &&
-			str[i] != 'W' && str[i] != 'E' && str[i] != 'S' && str[i] != 32)
-		{
+		if (i - 1 >= 0 && map[actual][i - 1] == '0')
 			return (1);
-		}
-		i++;
+		if (map[actual][i + 1] == '0')
+			return (1);
+		if (actual + 1 != y && map[actual + 1][i] == '0')
+			return (1);
+		if (actual != 0 && map[actual - 1][i] == '0')
+			return (1);
 	}
 	return (0);
 }
 
-int	ft_wall(char *str)
+int	ft_map_player(char **map, int actual, int i, int y)
 {
-	int	i;
+	if (map[actual][i] == 'N' || map[actual][i] == 'S' || map[actual][i] == 'E' || map[actual][i] == 'W')
+	{
+		if (i - 1 >= 0 && (map[actual][i - 1] != '0' && map[actual][i - 1] != '1'))
+			return (1);
+		if (map[actual][i + 1] != '0' && map[actual][i + 1] != '1')
+			return (1);
+		if (actual + 1 != y && (map[actual + 1][i] != '0' && map[actual + 1][i] != '1'))
+			return (1);
+		if (actual != 0 && (map[actual - 1][i] != '0' && map[actual - 1][i] != '1'))
+			return (1);
+		if (actual + 1 == y)
+			return (1);
+	}
+	return (0);
+}
 
+int	ft_map_char(char **map, int actual, int i)
+{
+	if (map[actual][i] != ' ' && map[actual][i] != '1' && map[actual][i] != '0' && map[actual][i] != 'N' && map[actual][i] != 'S' && map[actual][i] != 'W' && map[actual][i] != 'E')
+		return (1);
+	return (0);
+}
+
+int	ft_map_zero(char **map, int actual, int i, int y)
+{
+	if (map[actual][i] == '0')
+	{
+		if (map[actual][i + 1] != '1')
+		{
+			if (map[actual][i + 1] != '0' && map[actual][i + 1] != 'N' && map[actual][i + 1] != 'S' && map[actual][i + 1] != 'E' && map[actual][i + 1] != 'W')
+				return (1);
+		}
+		if (map[actual][i - 1] != '1')
+		{
+			if (map[actual][i - 1] != '0' && map[actual][i - 1] != 'N' && map[actual][i - 1] != 'S' && map[actual][i - 1] != 'E' && map[actual][i - 1] != 'W')
+				return (1);
+		}
+		if (actual + 1 != y && map[actual + 1][i] != '1')
+		{
+			if (map[actual + 1][i] != '0' && map[actual + 1][i] != 'N' && map[actual + 1][i] != 'S' && map[actual + 1][i] != 'E' && map[actual + 1][i] != 'W')
+				return (1);
+		}
+		if (actual != 0 && map[actual - 1][i] != '1')
+		{
+			if (map[actual - 1][i] != '0' && map[actual - 1][i] != 'N' && map[actual - 1][i] != 'S' && map[actual - 1][i] != 'E' && map[actual - 1][i] != 'W')
+				return (1);
+		}
+		if (actual + 1 == y)
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_map_total_position(char **map)
+{
+	int	actual;
+	int	i;
+	int	total_position;
+
+	actual = 0;
 	i = 0;
-	while (str && str[i] && str[i] == ' ')
+	total_position = 0;
+	while (map[actual])
 	{
-		i++;
+		i = 0;
+		while (map[actual][i] != '\0')
+		{
+			if (map[actual][i] == 'N' || map[actual][i] == 'S' || map[actual][i] == 'W' || map[actual][i] == 'E')
+			{
+				total_position++;
+			}
+			i++;
+		}
+		actual++;
 	}
-	while (str && str[i] && str[i] == '1')
-	{
-		i++;
-	}
-	if (str && str[i] == '\0')
+	if (total_position == 1)
 	{
 		return (0);
 	}
 	return (1);
 }
 
-int	ft_is_a_wall_around(char *str)
+t_parse	*ft_map(t_parse *parse, char **map)
 {
-	int i;
+	int	i = 0;
+	int actual = 0;
+	int	y = 0;
 
-	i = 0;
-	while (str && str[i] && str[i] == ' ')
+	if (ft_map_total_position(map) == 1)
+		parse->map_wg_player_number = 1;
+	while (map[y] != NULL)
+		y++;
+	while (map[actual])
 	{
-		i++;
+		i = 0;
+		while (map[actual][i] != '\0')
+		{
+			if (ft_map_char(map, actual, i) == 1)
+				parse->map_wg_character = 1;
+			if (ft_map_space(map, actual, i, y) == 1)
+				parse->map_wg_space = 1;
+			if (ft_map_player(map, actual, i, y) == 1)
+				parse->map_wg_player = 1;
+			if (ft_map_zero(map, actual, i, y) == 1)
+				parse->map_wg_zero = 1;
+			i++;
+		}
+		actual++;
 	}
-	if (str && str[i] && str[i] != '1')
-	{
-		return (1);
-	}
-	while (str && str[i])
-	{
-		i++;
-	}
-	i--;
-	if (str && str[i] != '1')
-	{
-		return (1);
-	}
-	return (0);
+	return (parse);
 }

@@ -1,65 +1,5 @@
 #include "../../cub3d.h"
 
-t_parse	*ft_parse_map_continue(t_parse *parse, int dup, char *str)
-{
-	if (dup > 1)
-	{
-		parse->map_dup = 1;
-	}
-	if (dup == 0)
-	{
-		parse->map_no_pos = 1;
-	}
-	if (str != 0)
-	{
-		parse->map_end = 1;
-	}
-	return (parse);
-}
-
-t_parse	*ft_parse_map(char **map, t_parse *parse, int i, int dup)
-{
-	if (map[0] == 0)
-	{
-		parse->no_map = 1;
-	}
-	else
-	{
-		while (map && map[i] && ft_space(map[i]) == 1)
-		{
-			if ((i == 0 && ft_wall(map[i]) == 1) || ft_is_a_wall_around(map[i]) == 1)
-			{
-				parse->map_wall = 1;
-			}
-			if (map[i + 1] == 0)
-			{
-    			if (ft_wall(map[i]) == 1)
-    			{
-        			if (i > 0 && map[i - 1] != 0 && map[i - 1][i] == '1')
-        			{
-            			parse->map_wall = 1;
-        			}
-    			}
-			}
-			if (i > 0 && map[i + 1] != 0 && check_string_position(map[i - 1], map[i], map[i + 1]) == 1)
-			{
-				parse->map_wall = 1;
-			}
-			if (ft_unwanted_character(map[i]) == 1)
-			{
-				parse->map_wg_char = 1;
-			}
-			if (check_orientation(map[i]) > 0)
-			{
-				dup = dup + check_orientation(map[i]);
-			}
-			i++;
-		}
-		parse = ft_parse_map_continue(parse, dup, map[i]);
-	}
-	return (parse);
-}
-
 int	ft_parsing(char **tab)
 {
 	t_parse	*parse;
@@ -79,11 +19,9 @@ int	ft_parsing(char **tab)
 	data = ft_add_value_to_data(tab, parse, data, 0);
 	map = ft_add_to_map(tab);
 	parse = check_error(data, parse);
-	parse = ft_parse_map(map, parse, 0, 0);
-	print_error(parse);
+	parse = ft_map(parse, map);
 	map = ft_free_tab(map);
 	data = ft_free_tab(data);
-	ft_all_parse(parse); 	// sdkjgslgdklshfglsdlgksh sdlkghdlskghdlkshgklsdhghsglksdhlgk
 	if (ft_error(parse) == 1)
 	{
 		free(parse);
@@ -114,7 +52,7 @@ int ft_parse_file(char *filename, char ***tab_ptr)
         free(line);
         i++;
     }
-    tab[i] = 0;
+    tab[i] = ft_pstrdup(line, '\0');
     free(line);
     *tab_ptr = tab;
     close(fd);

@@ -1,5 +1,14 @@
 #include "../../cub3d.h"
 
+int	is_non_map_char(char c)
+{
+	if (c != '\0' && c != '1' && c != '2' && c != '0' && c != ' ')
+	{
+		return (1);
+	}
+	return (0);
+}
+
 void getPositionOfN(t_map *map) {
     int rows = 1;
     int columns = 1;
