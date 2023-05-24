@@ -27,7 +27,6 @@ t_parse	*init_struct(t_parse *parse)
 	parse->map_no_pos = 0;
 	parse->no_map = 0;
 	parse->wrong_line = 0;
-
 	parse->map_wg_player = 0;
 	parse->map_wg_player_number = 0;
 	parse->map_wg_space = 0;

@@ -190,7 +190,7 @@ typedef struct	s_data
 /*	----- PARSING STRUCT END ----- */
 /*	----- PARSING ----- */
 /*	--- parse.c --- Obligatoire */
-int 	ft_parse(char **argv, t_map **map);
+int ft_parse(char **argv, t_map **map);
 int 	ft_parse_file(char *filename, char ***tab_ptr);
 int		ft_parsing(char **tab);
 t_parse	*ft_parse_map(char **map, t_parse *parse, int i, int dup);

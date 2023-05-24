@@ -65,21 +65,25 @@ int	init_key_press(t_game *game)
 
 int	main(int argc, char **argv)
 {
+	/*
 	t_map		*map;
+
 	t_game		*game;
 	t_player	*player;
 	void		*mlx;
 	void		*win_ptr;
+	*/
 	if (argc == 1)
 	{
 		printf("Error! *main return*\n");
 		return (1);
 	}
-	if (ft_parse(argv, &map) != 0)
+	if (ft_parse(argv) != 0)
 	{
 		printf("Error! *main return*\n");
 		return (1);
 	}
+	/*
 	getPositionOfN(map);
 	printf("Position of 'NWSE': (%f, %f)\n", map->x, map->y);
 	mlx = mlx_init();
@@ -99,5 +103,6 @@ int	main(int argc, char **argv)
 	mlx_hook(game->win, X_EVENT_KEY_RELEASE, 0, key_release, game);
 	mlx_loop_hook(mlx, game_loop, game);
 	mlx_loop(mlx);
+	*/
 	return (0);
 }
