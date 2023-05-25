@@ -43,7 +43,7 @@ void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 	int		j;
 	char	*dst;
 
-	lineHeight = (int)(screen_height / ray->perpWallDist);
+	lineHeight = (int)(screen_height / ray->perp_wall_dist);
 	drawStart = -lineHeight / 2 + screen_height / 2;
 	if (drawStart < 0)
 		drawStart = 0;
@@ -94,9 +94,9 @@ void	perform_dda(t_ray *ray, t_map *map)
 			hit = 1;
 	}
 	if (side == 0)
-		ray->perpWallDist = (ray->side_dist_x - ray->delta_dist_x);
+		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
-		ray->perpWallDist = (ray->side_dist_y - ray->delta_dist_y);
+		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
 }
 
 void	perform_column_raycasting(t_player *player, t_camera *camera,

@@ -87,8 +87,6 @@ typedef struct s_map
 	int				height;
 }					t_map;
 
-
-
 typedef struct s_game
 {
 	void			*mlx;
@@ -113,7 +111,7 @@ typedef struct s_ray
 	int				step_y;
 	int				map_x;
 	int				map_y;
-	double			perpWallDist;
+	double			perp_wall_dist;
 }					t_ray;
 
 typedef struct s_color
