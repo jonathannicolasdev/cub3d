@@ -112,6 +112,7 @@ typedef struct s_ray
 	int				map_x;
 	int				map_y;
 	double			perp_wall_dist;
+	int				side;
 }					t_ray;
 
 typedef struct s_color

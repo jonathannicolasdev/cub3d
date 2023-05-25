@@ -6,11 +6,9 @@
 /*   By: jnicolas <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 19:05:46 by jnicolas          #+#    #+#             */
-/*   Updated: 2023/04/29 19:05:47 by jnicolas         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:07:12 by jnicolas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//Raycasting goes here
 
 #include "../../cub3d.h"
 
@@ -36,33 +34,52 @@ void	draw_background(t_game *game)
 
 void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 {
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	int		color;
 	int		j;
 	char	*dst;
 
-	lineHeight = (int)(screen_height / ray->perp_wall_dist);
-	drawStart = -lineHeight / 2 + screen_height / 2;
-	if (drawStart < 0)
-		drawStart = 0;
-	drawEnd = lineHeight / 2 + screen_height / 2;
-	if (drawEnd >= screen_height)
-		drawEnd = screen_height - 1;
-	if (map->map[ray->map_x][ray->map_y] == '1'
-		|| map->map[ray->map_x][ray->map_y] == '2')
+	line_height = (int)(screen_height / ray->perp_wall_dist);
+	draw_start = -line_height / 2 + screen_height / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = line_height / 2 + screen_height / 2;
+	if (draw_end >= screen_height)
+		draw_end = screen_height - 1;
+	if (map->map[ray->map_x][ray->map_y] == '1')
 		color = RED;
-	else if (map->map[ray->map_x][ray->map_y] == '3'
-			|| map->map[ray->map_x][ray->map_y] == '4')
+	else if (map->map[ray->map_x][ray->map_y] == '2')
+		color = GREEN;
+	else if (map->map[ray->map_x][ray->map_y] == '3')
 		color = BLUE;
-	else if (map->map[ray->map_x][ray->map_y] == '5'
-			|| map->map[ray->map_x][ray->map_y] == '6')
-		color = BLUE;
-	else
+	else if (map->map[ray->map_x][ray->map_y] == '4')
 		color = 0xFFFFFF;
-	j = drawStart;
-	while (j <= drawEnd)
+	else
+		color = 0xFFFF00;
+	j = draw_start;
+	if (ray->side == 1)
+	{
+		switch (color)
+		{
+		case RED:
+			color = 0x880000;
+			break ;
+		case GREEN:
+			color = 0x008800;
+			break ;
+		case BLUE:
+			color = 0x000088;
+			break ;
+		case 0xFFFFFF:
+			color = 0x888888;
+			break ;
+		default:
+			color = 0x888800;
+		}
+	}
+	while (j <= draw_end)
 	{
 		dst = game->img.addr + j * game->img.len + x * (game->img.bpp / 8);
 		*(unsigned int *)dst = color;
@@ -97,6 +114,7 @@ void	perform_dda(t_ray *ray, t_map *map)
 		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
+	ray->side = side;
 }
 
 void	perform_column_raycasting(t_player *player, t_camera *camera,
@@ -113,7 +131,6 @@ void	perform_raycasting(t_player *player, t_game *game)
 {
 	int			x;
 	t_camera	*camera;
-	printf("before fail\n");
 
 	camera = init_camera(player);
 	x = 0;
