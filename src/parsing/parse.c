@@ -27,7 +27,7 @@ int	ft_parse_file(char *filename, char ***tab_ptr)
 	tab = malloc(sizeof(char *) * 100);
 	if (!tab)
 		return (FAIL);
-	memset(tab, 0, sizeof(char *) * 100);
+	ft_memset(tab, 0, sizeof(char *) * 100);
 	while (gnl(fd, &line) == 1)
 	{
 		tab[i] = ft_pstrdup(line, '\0');
@@ -83,6 +83,30 @@ t_map	*create_map_from_data(t_data *data)
 	return (map);
 }
 
+void	ft_map_player_position(t_map *data, char **map)
+{
+	int	actual;
+	int	i;
+
+	actual = 0;
+	i = 0;
+	while (map[actual])
+	{
+		i = 0;
+		while (map[actual][i] != '\0')
+		{
+			if (map[actual][i] == 'N' || map[actual][i] == 'S'
+				|| map[actual][i] == 'W' || map[actual][i] == 'E')
+			{
+				data->player_x = i + 0.5;
+				data->player_y = actual + 0.5;
+			}
+			i++;
+		}
+		actual++;
+	}
+}
+
 int	ft_parse(char **argv, t_map **map)
 {
 	char	**tab;
@@ -98,5 +122,6 @@ int	ft_parse(char **argv, t_map **map)
 	free(data);
 	if (!(*map))
 		return (FAIL);
+	ft_map_player_position(*map, (*map)->map);
 	return (SUCCESS);
 }

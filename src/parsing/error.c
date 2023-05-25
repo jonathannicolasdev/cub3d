@@ -12,6 +12,7 @@
 
 #include "../../cub3d.h"
 
+
 int	tinder(char *str)
 {
 	int	i;
@@ -39,12 +40,17 @@ int	tinder(char *str)
 
 int	ft_error(t_parse *parse)
 {
-	if (parse->north != 1 || parse->south != 1 || parse->west != 1
-		|| parse->east != 1 || parse->floor != 1 || parse->ceiling != 1
-		|| parse->no_map != 0 || parse->map_wg_char != 0 || parse->map_end != 0
-		|| parse->map_wall != 0 || parse->map_dup != 0 || parse->map_no_pos != 0
-		|| parse->wrong_line != 0)
+	if (parse->no_map != 0 || parse->map_wg_char != 0 || parse->map_end != 0
+		|| parse->map_wall != 0 || parse->map_dup != 0 || parse->map_no_pos != 0)
 	{
+		printf("penis!\n");
+		return (1);
+	}
+	if (parse->file_north != 1 || parse->file_south != 1 || parse->file_west != 1
+		|| parse->file_east != 1 || parse->file_ceiling != 1 || parse->file_floor != 1
+		|| parse->file_wrong_line != 0)
+	{
+		printf("Couleur/Texture en double!?\n");
 		return (1);
 	}
 	if (parse->map_wg_player != 0 || parse->map_wg_player_number != 0
@@ -55,29 +61,6 @@ int	ft_error(t_parse *parse)
 		return (1);
 	}
 	return (0);
-}
-
-t_parse	*get_error(t_parse *parse, char **tab, int i)
-{
-	while (tab[i])
-	{
-		if (tinder(tab[i]) == 2)
-			parse->north = is_double(parse->north);
-		else if (tinder(tab[i]) == 3)
-			parse->south = is_double(parse->south);
-		else if (tinder(tab[i]) == 4)
-			parse->west = is_double(parse->west);
-		else if (tinder(tab[i]) == 5)
-			parse->east = is_double(parse->east);
-		else if (tinder(tab[i]) == 7)
-			parse->floor = is_double(parse->floor);
-		else if (tinder(tab[i]) == 8)
-			parse->ceiling = is_double(parse->ceiling);
-		else if (tinder(tab[i]) == 9)
-			parse->wrong_line = 1;
-		i++;
-	}
-	return (parse);
 }
 
 t_parse	*check_error(char **data, t_parse *parse)

@@ -19,13 +19,6 @@ int	is_non_map_char(char c)
 	return (0);
 }
 
-int	is_double(int a)
-{
-	if (a == 1 || a == 2)
-		return (2);
-	return (1);
-}
-
 int	ft_space(char *str)
 {
 	char	*ptr;

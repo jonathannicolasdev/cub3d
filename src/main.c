@@ -80,11 +80,9 @@ int	main(int argc, char **argv)
 		printf("Error! *main return*\n");
 		return (1);
 	}
-	getPositionOfN(map);
-	printf("Position of 'NWSE': (%f, %f)\n", map->x, map->y);
 	mlx = mlx_init();
 	win_ptr = mlx_new_window(mlx, screen_width, screen_height, "cub3d");
-	player = init_player(map->y, map->x, -1, 0);
+	player = init_player(map->player_y, map->player_x, -1, 0);
 	player->camera=init_camera(player);
 	game = malloc(sizeof(t_game));
 	game->map = map;

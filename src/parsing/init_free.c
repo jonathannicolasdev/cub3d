@@ -32,6 +32,13 @@ t_parse	*init_struct(t_parse *parse)
 	parse->map_wg_space = 0;
 	parse->map_wg_zero = 0;
 	parse->map_wg_character = 0;
+	parse->file_north = 0;
+	parse->file_south = 0;
+	parse->file_west = 0;
+	parse->file_east = 0;
+	parse->file_floor = 0;
+	parse->file_ceiling = 0;
+	parse->file_wrong_line = 0;
 	return (parse);
 }
 

@@ -113,8 +113,8 @@ typedef struct s_map
 	char			**map;
 	int				width;
 	int				height;
-    float x;
-    float y;
+	float		player_x;
+	float		player_y;
 }					t_map;
 /*	----- PARSING STRUCT MODIFY MAP END ----- */
 
@@ -169,6 +169,13 @@ typedef struct	s_parse
 	int map_no_pos;
 	int no_map;
 	int wrong_line;
+	int	file_north;
+	int	file_south;
+	int	file_west;
+	int	file_east;
+	int	file_floor;
+	int	file_ceiling;
+	int	file_wrong_line;
 	int	map_wg_player;
 	int	map_wg_player_number;
 	int	map_wg_space;
@@ -235,7 +242,6 @@ void    ft_all_parse(t_parse *parse);
 
 /*	--- map.c --- Obligatoire nouvelle version */
 t_parse	*ft_map(t_parse *parse, char **map);
-int		ft_map_total_position(char **map);
 int		ft_map_zero(char **map, int actual, int i, int y);
 int		ft_map_char(char **map, int actual, int i);
 int		ft_map_player(char **map, int actual, int i, int y);
