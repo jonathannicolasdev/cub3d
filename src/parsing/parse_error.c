@@ -64,8 +64,9 @@ t_parse	*ft_get_error(t_parse *parse, char **tab)
 
 int	ft_error(t_parse *parse)
 {
-	if (parse->file_north != 1 || parse->file_south != 1 || parse->file_west != 1
-		|| parse->file_east != 1 || parse->file_ceiling != 1 || parse->file_floor != 1
+	if (parse->file_north != 1 || parse->file_south != 1
+		|| parse->file_west != 1 || parse->file_east != 1
+		|| parse->file_ceiling != 1 || parse->file_floor != 1
 		|| parse->file_wrong_line != 0)
 	{
 		printf("Couleur/Texture en double!?\n");
@@ -80,4 +81,3 @@ int	ft_error(t_parse *parse)
 	}
 	return (0);
 }
-

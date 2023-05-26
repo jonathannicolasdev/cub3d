@@ -19,20 +19,27 @@ int	ft_map_lost(char c)
 	return (0);
 }
 
-char    *ft_file_path(const char *line)
+char	*ft_file_path(const char *line)
 {
-    char* start = strchr(line, '.');
-    if (start != NULL) {
-        char* end = strstr(start, ".xpm");
-        if (end != NULL && end > start) {
-            size_t filepath_length = end - start + 4;
-            char* filepath = (char*)malloc((filepath_length + 1) * sizeof(char));
-            strncpy(filepath, start, filepath_length);
-            filepath[filepath_length] = '\0';
-            return filepath;
-        }
-    }
-    return NULL;
+	char	*start;
+	char	*end;
+	size_t	filepath_length;
+	char	*filepath;
+
+	start = strchr(line, '.');
+	if (start != NULL)
+	{
+		end = strstr(start, ".xpm");
+		if (end != NULL && end > start)
+		{
+			filepath_length = end - start + 4;
+			filepath = (char *)malloc((filepath_length + 1) * sizeof(char));
+			strncpy(filepath, start, filepath_length);
+			filepath[filepath_length] = '\0';
+			return (filepath);
+		}
+	}
+	return (NULL);
 }
 
 int	ft_file(char *str)
@@ -62,10 +69,10 @@ int	ft_file(char *str)
 	return (0);
 }
 
-int ft_check_file(char *str)
+int	ft_check_file(char *str)
 {
-	char *new;
-	int fd;
+	char	*new;
+	int		fd;
 
 	new = ft_file_path(str);
 	if (new == NULL)
