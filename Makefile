@@ -3,7 +3,7 @@ LIBFTNAME = libft.a
 LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
-SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c
+SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c texturing/texturing.c
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 

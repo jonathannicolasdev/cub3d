@@ -42,97 +42,105 @@
 
 typedef struct s_img
 {
-	void			*img;
-	int				wid;
-	int				hei;
-	char			*addr;
-	int				bpp;
-	int				len;
-	int				endian;
-}					t_img;
+	void *img;
+	int wid;
+	int hei;
+	char *addr;
+	int bpp;
+	int len;
+	int endian;
+} t_img;
 
 typedef struct s_camera
 {
-	double			camera_x;
-	double			camera_y;
-	double			camera_dir_x;
-	double			camera_dir_y;
-	double			camera_plane_x;
-	double			camera_plane_y;
-}					t_camera;
+	double camera_x;
+	double camera_y;
+	double camera_dir_x;
+	double camera_dir_y;
+	double camera_plane_x;
+	double camera_plane_y;
+} t_camera;
 
 typedef struct s_player
 {
-	double			vector_dir_x;
-	double			vector_dir_y;
-	double			pos_x;
-	double			pos_y;
-	t_camera		*camera;
-}					t_player;
+	double vector_dir_x;
+	double vector_dir_y;
+	double pos_x;
+	double pos_y;
+	t_camera *camera;
+} t_player;
 
 typedef struct s_key
 {
-	bool			w;
-	bool			a;
-	bool			s;
-	bool			d;
-	bool			left;
-	bool			right;
-}					t_key;
+	bool w;
+	bool a;
+	bool s;
+	bool d;
+	bool left;
+	bool right;
+} t_key;
 
 typedef struct s_map
 {
-	char			**map;
-	int				width;
-	int				height;
-}					t_map;
+	char **map;
+	int width;
+	int height;
+	t_img img[4];
+} t_map;
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
-	t_player		*player;
-	t_camera		*camera;
-	t_map			*map;
-	t_key			key;
-	t_img			img;
-}					t_game;
+	void *mlx;
+	void *win;
+	t_player *player;
+	t_camera *camera;
+	t_map *map;
+	t_key key;
+	t_img img;
+} t_game;
 
 typedef struct s_ray
 {
-	double			camera_x;
-	double			ray_dir_x;
-	double			ray_dir_y;
-	double			side_dist_x;
-	double			side_dist_y;
-	double			delta_dist_x;
-	double			delta_dist_y;
-	int				step_x;
-	int				step_y;
-	int				map_x;
-	int				map_y;
-	double			perp_wall_dist;
-	int				side;
-}					t_ray;
+	double camera_x;
+	double ray_dir_x;
+	double ray_dir_y;
+	double side_dist_x;
+	double side_dist_y;
+	double delta_dist_x;
+	double delta_dist_y;
+	int step_x;
+	int step_y;
+	int map_x;
+	int map_y;
+	double perpWallDist;
+	int side;
+	int direction;
+	int drawStart;
+	int drawEnd;
+	double wallX;
+		int lineHeight;
+
+} t_ray;
 
 typedef struct s_color
 {
-	unsigned char	blue;
-	unsigned char	green;
-	unsigned char	red;
-	unsigned char	blank;
-}					t_color;
+	unsigned char blue;
+	unsigned char green;
+	unsigned char red;
+	unsigned char blank;
+} t_color;
 
-t_map				*read_map(char *filename);
-t_camera			*init_camera(t_player *player);
-t_player			*init_player(double pos_x, double pos_y, double dir_x, \
-					double dir_y);
-t_ray				*init_ray(t_player *player, t_camera *camera, int x_screen);
-void				perform_raycasting(t_player *player, t_game *game);
-int					key_press(int keycode, t_game *game);
-int					key_release(int keycode, t_game *game);
-int					move(t_game *game);
-void				draw_background(t_game	*game);
-int					game_loop(t_game *game);
-void				reset_camera(t_player *player);
+t_map *read_map(char *filename);
+t_camera *init_camera(t_player *player);
+t_player *init_player(double pos_x, double pos_y, double dir_x,
+					  double dir_y);
+t_ray *init_ray(t_player *player, t_camera *camera, int x_screen);
+void perform_raycasting(t_player *player, t_game *game);
+int key_press(int keycode, t_game *game);
+int key_release(int keycode, t_game *game);
+int move(t_game *game);
+void draw_background(t_game *game);
+int game_loop(t_game *game);
+void reset_camera(t_player *player);
+void load_bitmap(t_game *info, int idx, char *path);
 #endif
