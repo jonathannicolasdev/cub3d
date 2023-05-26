@@ -72,13 +72,18 @@ t_data	*create_data_from_tab(char **tab)
 	return (data);
 }
 
+
+
 void store_file_paths(t_map *map, t_data *data)
 {
     map->file_north = data->file_north;
     map->file_south = data->file_south;
     map->file_west = data->file_west;
     map->file_east = data->file_east;
+    map->color_ceiling = data->color_ceiling;
+    map->color_floor = data->color_floor;
 }
+
 
 int	ft_parse(char **argv, t_map **map)
 {
