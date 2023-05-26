@@ -6,7 +6,7 @@
 /*   By: jnicolas <jnicolas@student.42quebec>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:56:32 by jnicolas          #+#    #+#             */
-/*   Updated: 2021/11/08 15:31:00 by jnicolas         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:02:38 by ylabbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char	*s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+char	*ft_strcut(char *buffer, char c);
+int		ft_pstrlen(char *str, char c);
+char	*ft_pstrdup(char *buffer, char c);
+char	*ft_pstrjoin(char *s1, char *s2);
+char	*ft_pstrdup(char *buffer, char c);
+
 #endif

@@ -3,12 +3,24 @@ LIBFTNAME = libft.a
 LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
-SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c texturing/texturing.c
+SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c texturing/texturing.c \
+		parsing/parse_map.c \
+		parsing/parse_map_funct.c \
+		parsing/parse_cub.c \
+		parsing/parse_data_init_and_free.c \
+		parsing/parse_color.c \
+		parsing/parse_error.c \
+		parsing/parse_data_file.c \
+		parsing/map_struct_funct.c \
+		parsing/data_to_struct.c \
+		parsing/parse_data_print_struct.c \
+		parsing/parse_data_start.c \
+		parsing/parse_step.c
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 
 # /* ~~~~~~~ INCLUDING GNL ~~~~~~~ */
-GNL_DIR = ./gnl/
+GNL_DIR = ./get_next_line/
 GNL = get_next_line.c \
 	get_next_line_utils.c \
 
@@ -32,6 +44,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(GNL_OBJS)
 	@echo $(CURSIVE)$(GRAY) "     - Compiling $(NAME)..." $(NONE)
 	@make -C ${LIBFTPATH}
+	@cd minilibx_opengl && make
 	@gcc $(FLAGS) $(OBJS) $(GNL_OBJS) ./libft/libft.a ./minilibx_opengl/libmlx.a $(LINKS) -o $(NAME)
 	@echo $(GREEN)"- Compiled -"$(NONE)
 	@rm $(OBJS)
@@ -44,7 +57,7 @@ exe: all
 
 clean:
 	@echo $(CURSIVE)$(GRAY) "     - Removing object files..." $(NONE)
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(GNL_OBJS)
 
 fclean: clean
 	@echo $(CURSIVE)$(GRAY) "     - Removing $(NAME)..." $(NONE)

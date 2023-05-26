@@ -20,7 +20,18 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-
+# include "get_next_line/get_next_line.h"
+# include <unistd.h>
+# include <fcntl.h>
+# define NORTH 'N'
+# define SOUTH 'S'
+# define WEST 'W'
+# define EAST 'E'
+# define BUFFER_SIZE 4096
+# define SUCCESS 0
+# define FAIL 1
+# define FAIL_FD -1
+# define FAIL_CUB -2
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
 # define X_EVENT_KEY_EXIT 17
@@ -82,10 +93,14 @@ typedef struct s_key
 
 typedef struct s_map
 {
+	    int rows;
+    int columns;
 	char			**map;
 	int				width;
 	int				height;
 	t_img			img[4];
+	float		player_x;
+	float		player_y;
 }					t_map;
 
 typedef struct s_game
@@ -130,6 +145,33 @@ typedef struct s_color
 	unsigned char	blank;
 }					t_color;
 
+typedef struct	s_parse
+{
+	int	file_north;
+	int	file_south;
+	int	file_west;
+	int	file_east;
+	int	file_floor;
+	int	file_ceiling;
+	int	file_wrong_line;
+	int	map_wg_player;
+	int	map_wg_player_number;
+	int	map_wg_space;
+	int map_wg_zero;
+	int	map_wg_character;
+}				t_parse;
+
+typedef struct	s_data
+{
+	char	*file_north;
+	char	*file_south;
+	char	*file_west;
+	char	*file_east;
+	char	*color_floor;
+	char	*color_ceiling;
+	char	**map;
+}				t_data;
+
 t_map				*read_map(char *filename);
 t_camera			*init_camera(t_player *player);
 t_player			*init_player(double pos_x, double pos_y, double dir_x,
@@ -143,4 +185,67 @@ void				draw_background(t_game *game);
 int					game_loop(t_game *game);
 void				reset_camera(t_player *player);
 void				load_bitmap(t_game *info, int idx, char *path);
+
+/*	[map_struct_funct.c]	- */
+void	ft_map_player_position(t_map *data, char **map);
+t_map	*create_map_from_data(t_data *data);
+
+/*	[parse_step.c]	- */
+int	ft_parsing_second(t_parse *parse, char **data, char **map);
+int	ft_parsing(char **tab);
+
+/*	[parse_data_start.c]	- */
+int		parse_file_and_tab(char *filename, char ***tab);
+int		ft_parse_file(char *filename, char ***tab_ptr);
+int		ft_parse(char **argv, t_map **map);
+t_data	*create_data_from_tab(char **tab);
+
+/*	[parse_data_file.c]	- */
+char    *ft_file_path(const char *line);
+int ft_check_file(char *str);
+int	ft_map_lost(char c);
+int	ft_file(char *str);
+
+/*	[parse_error.c]	- */
+t_parse	*ft_check_error(char **data, t_parse *parse);
+t_parse	*ft_get_error(t_parse *parse, char **tab);
+int	ft_error(t_parse *parse);
+
+/*	[parse_color.c]	- */
+int validate_color_string(char *str, int i);
+int validate_rgb_color(char *str, int i);
+char *ft_file_color(char *str);
+int is_valid_character(char c);
+int	is_valid_number(char *str, int i);
+
+/*	[parse_data_init_and_free.c]	- */
+t_parse	*init_struct(t_parse *parse);
+t_data	*ft_free_data(t_data *data);
+char	**ft_free_tab(char **tab);
+
+/*	[parse_cub.c]	- */
+int	ft_fd_cub(char *file);
+int	ft_cub(char *argv);
+
+/*	[parse_map.c]	-	*/
+void	ft_map_check(t_parse *parse, char **map, int actual, int y);
+t_parse	*ft_map(t_parse *parse, char **map);
+
+/*	[parse_map_funct.c]	-	*/
+int	ft_map_player(char **map, int actual, int i, int y);
+int	ft_map_space(char **map, int actual, int i, int y);
+int	ft_map_zero(char **map, int actual, int i, int y);
+int	ft_map_char(char **map, int actual, int i);
+int	ft_map_total_position(char **map);
+
+/*	[data_to_struct.c]	- */
+char	**ft_add_value_to_data(char **tab, t_parse *parse, char **data, int i);
+t_data	*ft_add_to_data(t_data *data, char **tab, int i);
+char	**ft_add_to_map(char **tab);
+int	ft_space(char *str);
+
+/*	[parse_data_print_struct.c]	- */
+void print_struct(t_parse *parse);
+void print_data(const t_data *data);
+
 #endif

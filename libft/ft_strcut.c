@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strcut.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnicolas <marvin@42quebec.com>             +#+  +:+       +#+        */
+/*   By: ylabbe <ylabbe@student.42quebec.c>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 21:19:38 by jnicolas          #+#    #+#             */
-/*   Updated: 2022/10/13 17:20:26 by jnicolas         ###   ########.fr       */
+/*   Created: 2023/05/24 19:03:06 by ylabbe            #+#    #+#             */
+/*   Updated: 2023/05/24 19:03:07 by ylabbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int	ft_strendl(char *str)
+int	check_new_line(char *str, char c)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != '\0')
+	while (str && str[i])
 	{
-		if (str[i] == '\n')
+		if (str[i] == c)
+		{
 			return (1);
+		}
 		i++;
 	}
 	return (0);
 }
 
-char	*ft_strnew(size_t size)
+char	*ft_strcut(char *buffer, char c)
 {
-	char	*str;
+	int	i;
 
-	str = (char *)malloc(sizeof(char) * (size + 1));
-	if (!str)
+	i = 0;
+	if (!(buffer))
 		return (NULL);
-	str[size] = '\0';
-	while (size--)
-		str[size] = '\0';
-	return (str);
+	if (check_new_line(buffer, c) == 0)
+		return (NULL);
+	while (buffer[i] != c)
+		i++;
+	i++;
+	return (ft_pstrdup(buffer + i, '\0'));
 }
