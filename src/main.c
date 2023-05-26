@@ -46,6 +46,12 @@ t_game	*init_game(void *mlx, t_map *map)
 	return (game);
 }
 
+void map_to_game(t_map *map, t_game *game)
+{
+    game->color_ceiling = map->color_ceiling;
+    game->color_floor = map->color_floor;
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -68,6 +74,7 @@ int	main(int argc, char **argv)
 	game = init_game(mlx, map);
 	game->win = win_ptr;
 	init_key_press(game);
+	map_to_game(map, game);
 	mlx_hook(game->win, X_EVENT_KEY_PRESS, 0, key_press, game);
 	mlx_hook(game->win, X_EVENT_KEY_RELEASE, 0, key_release, game);
 	mlx_loop_hook(mlx, game_loop, game);

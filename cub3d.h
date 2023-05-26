@@ -118,6 +118,8 @@ typedef struct s_game
 	t_map			*map;
 	t_key			key;
 	t_img			img;
+	char	*color_floor;
+	char	*color_ceiling;
 }					t_game;
 
 typedef struct s_ray

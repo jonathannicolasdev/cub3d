@@ -11,13 +11,65 @@
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+unsigned int	convert_to_hexa(const char *rgb)
+{
+	char			*token;
+	char			*rgbCopy;
+	unsigned int	hexValue;
+
+	rgbCopy = ft_strdup(rgb);
+	unsigned int r, g, b;
+	token = ft_strtok(rgbCopy, ",");
+	r = ft_atoi(token);
+	token = ft_strtok(NULL, ",");
+	g = ft_atoi(token);
+	token = ft_strtok(NULL, ",");
+	b = ft_atoi(token);
+	free(rgbCopy);
+	hexValue = ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+	return (hexValue);
+}
+
+void	draw_background(t_game *game)
+{
+	unsigned int	*sss;
+	int				i;
+	int				j;
+	char			*dst;
+
+	sss = malloc(sizeof(unsigned int));
+	if (sss == NULL)
+	{
+		return ;
+	}
+	*sss = convert_to_hexa(game->color_ceiling);
+	i = 0;
+	while (i < SCREEN_WIDTH)
+	{
+		j = 0;
+		while (j < SCREEN_HEIGHT)
+		{
+			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
+			*(unsigned int *)dst = *sss;
+			j++;
+		}
+		i++;
+	}
+	free(sss);
+}
+
+/*
 void	draw_background(t_game *game)
 {
 	char	*dst;
 	int		i;
 	int		j;
 
+	
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
@@ -31,6 +83,7 @@ void	draw_background(t_game *game)
 		i++;
 	}
 }
+*/
 
 void	calculate_column_param(t_ray *ray, t_game *game)
 {
@@ -46,12 +99,13 @@ void	calculate_column_param(t_ray *ray, t_game *game)
 	if (ray->draw_end >= SCREEN_HEIGHT)
 		ray->draw_end = SCREEN_HEIGHT - 1;
 	if (ray->side == 0)
-		ray->wall_x = game->player->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
+		ray->wall_x = game->player->pos_y + ray->perp_wall_dist
+			* ray->ray_dir_y;
 	else
-		ray->wall_x = game->player->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
+		ray->wall_x = game->player->pos_x + ray->perp_wall_dist
+			* ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
 }
-
 
 void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 {

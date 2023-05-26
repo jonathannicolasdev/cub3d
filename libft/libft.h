@@ -56,5 +56,6 @@ int		ft_pstrlen(char *str, char c);
 char	*ft_pstrdup(char *buffer, char c);
 char	*ft_pstrjoin(char *s1, char *s2);
 char	*ft_pstrdup(char *buffer, char c);
+char	*ft_strtok(char *str, const char *delim);
 
 #endif
