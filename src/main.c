@@ -39,10 +39,10 @@ t_game	*init_game(void *mlx, t_map *map)
 	game->player->camera = init_camera(player);
 	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	game->img.addr = mlx_get_data_addr(game->img.img, &(game->img.bpp), &(game->img.len), &(game->img.endian));
-	load_bitmap(game, 0, "./bitmaps/north_test.xpm");
-	load_bitmap(game, 1, "./bitmaps/south_test.xpm");
-	load_bitmap(game, 2, "./bitmaps/east_test.xpm");
-	load_bitmap(game, 3, "./bitmaps/west_test.xpm");
+	load_bitmap(game, 0, map->file_north);
+	load_bitmap(game, 1, map->file_south);
+	load_bitmap(game, 2, map->file_east);
+	load_bitmap(game, 3, map->file_west);
 	return (game);
 }
 

@@ -1,13 +1,10 @@
-WE       ./test.xpm
-
-     NO ./test.xpm
+NO     ./bitmaps/north_test.xpm     
+ SO  ./bitmaps/south_test.xpm
+ 
+WE ./bitmaps/west_test.xpm 
+EA ./bitmaps/east_test.xpm
 
 F 255,255,0
-
-SO ./test.xpm
-
-
-EA ./test.xpm
 
 C     255 ,  0     ,255                               
 

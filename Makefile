@@ -3,7 +3,13 @@ LIBFTNAME = libft.a
 LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
-SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c texturing/texturing.c \
+SRC =  main.c \
+		raycasting/init_raycasting.c \
+		raycasting/raycasting.c \
+		controller/game_loop.c \
+		controller/hook.c \
+		controller/move.c \
+		texturing/texturing.c \
 		parsing/parse_map.c \
 		parsing/parse_map_funct.c \
 		parsing/parse_cub.c \
@@ -19,7 +25,6 @@ SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/ga
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 
-# /* ~~~~~~~ INCLUDING GNL ~~~~~~~ */
 GNL_DIR = ./get_next_line/
 GNL = get_next_line.c \
 	get_next_line_utils.c \
@@ -29,7 +34,6 @@ GNL_OBJS = ${addprefix ${GNL_DIR}, ${GNL:.c=.o}}
 
 FLAGS = -Wall -Wextra -Werror -g
 LINKS = -framework OpenGL -framework AppKit
-#MLB_FLAGS	= -I -g -L /usr/X11/lib -L./mlbx -lmlx -Imlx -lXext -lX11 -lz -lm
 
 %.o : %.c
 	$(CC) $(FLAGS) -o $@ -c $<

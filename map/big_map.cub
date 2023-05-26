@@ -1,8 +1,8 @@
-NO     ./test.xpm      
- SO  ./test.xpm 
+NO     ./bitmaps/north_test.xpm     
+ SO  ./bitmaps/south_test.xpm
  
-WE ./test.xpm 
-EA ./test.xpm 
+WE ./bitmaps/west_test.xpm 
+EA ./bitmaps/east_test.xpm
 
 F 160,160,160
 C 0,128,255

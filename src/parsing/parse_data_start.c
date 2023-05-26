@@ -72,6 +72,14 @@ t_data	*create_data_from_tab(char **tab)
 	return (data);
 }
 
+void store_file_paths(t_map *map, t_data *data)
+{
+    map->file_north = data->file_north;
+    map->file_south = data->file_south;
+    map->file_west = data->file_west;
+    map->file_east = data->file_east;
+}
+
 int	ft_parse(char **argv, t_map **map)
 {
 	char	**tab;
@@ -84,10 +92,11 @@ int	ft_parse(char **argv, t_map **map)
 	if (!data)
 		return (FAIL);
 	*map = create_map_from_data(data);
-	print_data(data);
+	//print_data(data);
 	free(data);
 	if (!(*map))
 		return (FAIL);
 	ft_map_player_position(*map, (*map)->map);
+	store_file_paths(*map, data);
 	return (SUCCESS);
 }

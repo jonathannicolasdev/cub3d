@@ -101,6 +101,10 @@ typedef struct s_map
 	t_img			img[4];
 	float		player_x;
 	float		player_y;
+	char	*file_north;
+	char	*file_south;
+	char	*file_west;
+	char	*file_east;
 }					t_map;
 
 typedef struct s_game
