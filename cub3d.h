@@ -181,60 +181,6 @@ typedef struct	s_data
 	char	**map;
 }				t_data;
 /*	----- PARSING STRUCT END ----- */
-/*	----- PARSING ----- */
-
-/*	--- init_free.c --- Obligatoire */
-t_parse	*init_struct(t_parse *parse);
-char	**ft_free_tab(char **tab);
-t_data	*ft_free_data(t_data *data);
-
-/*	--- cub.c --- Obligatoire */
-int		ft_cub(char *argv);
-int		ft_fd_cub(char *file);
-
-/*	--- map.c --- Obligatoire */
-int		check_orientation(char *str);
-int		is_non_map_char(char c);
-int		ft_unwanted_character(char *str);
-int		ft_wall(char *str);
-int		ft_is_a_wall_around(char *str);
-
-/*	--- add.c --- Obligatoire à modifier */
-t_data	*ft_add_to_data(t_data *data, char **tab, int i);
-char	**ft_add_to_map(char **tab);
-char	**ft_add_value_to_data(char **tab, t_parse *parse, char **data, int i);
-
-/*	--- error.c --- Obligatoire à modifier */
-int		tinder(char *str);
-int		ft_error(t_parse *parse);
-t_parse	*get_error(t_parse *parse, char **tab, int i);
-t_parse	*check_error(char **data, t_parse *parse);
-void	print_error(t_parse *parse);
-
-/*	--- other.c --- Obligatoire à modifier */
-void	getPositionOfN(t_map *map);
-int		is_double(int a);
-int		check_file_readability(char *str, int i);
-int		validate_color_string(char *str, int i);
-int		validate_rgb_color(char *str, int i);
-int		ft_space(char *str);
-
-/*	--- test_print.c --- On peu supprimer à la fin du projet - Ne pas norminette */
-void    ft_all_data(t_data *data);
-void	print_map(char **map);
-void    ft_all_parse(t_parse *parse);
-
-
-
-/*	--- map.c --- Obligatoire nouvelle version */
-t_parse	*ft_map(t_parse *parse, char **map);
-int		ft_map_zero(char **map, int actual, int i, int y);
-int		ft_map_char(char **map, int actual, int i);
-int		ft_map_player(char **map, int actual, int i, int y);
-int		ft_map_space(char **map, int actual, int i, int y);
-
-
-/*	----- PARSING END ----- */
 
 t_map				*read_map(char *filename);
 t_camera			*init_camera(t_player *player);
@@ -249,26 +195,64 @@ void				draw_background(t_game	*game);
 int					game_loop(t_game *game);
 void				reset_camera(t_player *player);
 
-/*	--- parse.c --- */
-int		ft_parse_file(char *filename, char ***tab_ptr);
-int		parse_file_and_tab(char *filename, char ***tab);
-t_data	*create_data_from_tab(char **tab);
+/*	[map_struct_funct.c]	- */
+void	ft_map_player_position(t_map *data, char **map);
 t_map	*create_map_from_data(t_data *data);
+
+/*	[parse_step.c]	- */
+int	ft_parsing_second(t_parse *parse, char **data, char **map);
+int	ft_parsing(char **tab);
+
+/*	[parse_data_start.c]	- */
+int		parse_file_and_tab(char *filename, char ***tab);
+int		ft_parse_file(char *filename, char ***tab_ptr);
 int		ft_parse(char **argv, t_map **map);
+t_data	*create_data_from_tab(char **tab);
 
-/* --- parsing.c --- */
-int		ft_parsing_second(t_parse *parse, char **data, char **map);
-int		ft_parsing(char **tab);
+/*	[parse_data_file.c]	- */
+char    *ft_file_path(const char *line);
+int ft_check_file(char *str);
+int	ft_map_lost(char c);
+int	ft_file(char *str);
 
-/* --- map.c --- */
-t_parse	*ft_map(t_parse *parse, char **map);
+/*	[parse_error.c]	- */
+t_parse	*ft_check_error(char **data, t_parse *parse);
+t_parse	*ft_get_error(t_parse *parse, char **tab);
+int	ft_error(t_parse *parse);
+
+/*	[parse_color.c]	- */
+int validate_color_string(char *str, int i);
+int validate_rgb_color(char *str, int i);
+char *ft_file_color(char *str);
+
+/*	[parse_data_init_and_free.c]	- */
+t_parse	*init_struct(t_parse *parse);
+t_data	*ft_free_data(t_data *data);
+char	**ft_free_tab(char **tab);
+
+/*	[parse_cub.c]	- */
+int	ft_fd_cub(char *file);
+int	ft_cub(char *argv);
+
+/*	[parse_map.c]	-	*/
 void	ft_map_check(t_parse *parse, char **map, int actual, int y);
+t_parse	*ft_map(t_parse *parse, char **map);
 
-/* --- map_check.c --- */
-int	ft_map_total_position(char **map);
-int	ft_map_zero(char **map, int actual, int i, int y);
-int	ft_map_char(char **map, int actual, int i);
+/*	[parse_map_funct.c]	-	*/
 int	ft_map_player(char **map, int actual, int i, int y);
 int	ft_map_space(char **map, int actual, int i, int y);
+int	ft_map_zero(char **map, int actual, int i, int y);
+int	ft_map_char(char **map, int actual, int i);
+int	ft_map_total_position(char **map);
+
+/*	[data_to_struct.c]	- */
+char	**ft_add_value_to_data(char **tab, t_parse *parse, char **data, int i);
+t_data	*ft_add_to_data(t_data *data, char **tab, int i);
+char	**ft_add_to_map(char **tab);
+int	ft_space(char *str);
+
+/*	[parse_data_print_struct.c]	- */
+void print_struct(t_parse *parse);
+void print_data(const t_data *data);
 
 #endif

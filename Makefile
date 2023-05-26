@@ -4,13 +4,18 @@ LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
 SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c \
-		parsing/cub.c \
-		parsing/init_free.c \
-		parsing/map.c \
-		parsing/map_check.c \
-		parsing/color_and_texture.c \
-		parsing/parse.c \
-		parsing/parsing.c 
+		parsing/parse_map.c \
+		parsing/parse_map_funct.c \
+		parsing/parse_cub.c \
+		parsing/parse_data_init_and_free.c \
+		parsing/parse_color.c \
+		parsing/parse_error.c \
+		parsing/parse_data_file.c \
+		parsing/map_struct_funct.c \
+		parsing/data_to_struct.c \
+		parsing/parse_data_print_struct.c \
+		parsing/parse_data_start.c \
+		parsing/parse_step.c
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 
