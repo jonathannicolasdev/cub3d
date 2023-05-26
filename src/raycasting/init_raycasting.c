@@ -57,7 +57,7 @@ t_ray	*init_ray(t_player *player, t_camera *camera, int x_screen)
 	ray = malloc(sizeof(*ray));
 	map_x = (int)player->pos_x;
 	map_y = (int)player->pos_y;
-	camera_x = 2 * x_screen / (double)screen_width - 1;
+	camera_x = 2 * x_screen / (double)SCREEN_WIDTH - 1;
 	ray->ray_dir_x = player->vector_dir_x + camera->camera_plane_x * camera_x;
 	ray->ray_dir_y = player->vector_dir_y + camera->camera_plane_y * camera_x;
 	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);

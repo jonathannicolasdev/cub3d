@@ -18,9 +18,9 @@ void	move_vertical(t_game *game, int direction)
 	double	y;
 
 	x = game->player->pos_x + direction * game->player->vector_dir_x
-		* move_speed;
+		* MOVE_SPEED;
 	y = game->player->pos_y + direction * game->player->vector_dir_y
-		* move_speed;
+		* MOVE_SPEED;
 	game->player->pos_x = x;
 	game->player->pos_y = y;
 }
@@ -31,9 +31,9 @@ void	move_horizontal(t_game *game, int direction)
 	double	y;
 
 	x = game->player->pos_x + direction * game->player->vector_dir_y
-		* move_speed;
+		* MOVE_SPEED;
 	y = game->player->pos_y - direction * game->player->vector_dir_x
-		* move_speed;
+		* MOVE_SPEED;
 	game->player->pos_x = x;
 	game->player->pos_y = y;
 }
@@ -46,15 +46,15 @@ void	rotate_right(t_player *player)
 
 	camera = player->camera;
 	vector_dir_x_old = player->vector_dir_x;
-	player->vector_dir_x = player->vector_dir_x * cos(-rotation_speed)
-		- player->vector_dir_y * sin(-rotation_speed);
-	player->vector_dir_y = vector_dir_x_old * sin(-rotation_speed)
-		+ player->vector_dir_y * cos(-rotation_speed);
+	player->vector_dir_x = player->vector_dir_x * cos(-ROTATION_SPEED)
+		- player->vector_dir_y * sin(-ROTATION_SPEED);
+	player->vector_dir_y = vector_dir_x_old * sin(-ROTATION_SPEED)
+		+ player->vector_dir_y * cos(-ROTATION_SPEED);
 	camera_plane_x_old = camera->camera_plane_x;
-	camera->camera_plane_x = camera->camera_plane_x * cos(-rotation_speed)
-		- camera->camera_plane_y * sin(-rotation_speed);
-	camera->camera_plane_y = camera_plane_x_old * sin(-rotation_speed)
-		+ camera->camera_plane_y * cos(-rotation_speed);
+	camera->camera_plane_x = camera->camera_plane_x * cos(-ROTATION_SPEED)
+		- camera->camera_plane_y * sin(-ROTATION_SPEED);
+	camera->camera_plane_y = camera_plane_x_old * sin(-ROTATION_SPEED)
+		+ camera->camera_plane_y * cos(-ROTATION_SPEED);
 }
 
 void	rotate_left(t_player *player)
@@ -65,15 +65,15 @@ void	rotate_left(t_player *player)
 
 	camera = player->camera;
 	vector_dir_x_old = player->vector_dir_x;
-	player->vector_dir_x = player->vector_dir_x * cos(rotation_speed)
-		- player->vector_dir_y * sin(rotation_speed);
-	player->vector_dir_y = vector_dir_x_old * sin(rotation_speed)
-		+ player->vector_dir_y * cos(rotation_speed);
+	player->vector_dir_x = player->vector_dir_x * cos(ROTATION_SPEED)
+		- player->vector_dir_y * sin(ROTATION_SPEED);
+	player->vector_dir_y = vector_dir_x_old * sin(ROTATION_SPEED)
+		+ player->vector_dir_y * cos(ROTATION_SPEED);
 	camera_plane_x_old = camera->camera_plane_x;
-	camera->camera_plane_x = camera->camera_plane_x * cos(rotation_speed)
-		- camera->camera_plane_y * sin(rotation_speed);
-	camera->camera_plane_y = camera_plane_x_old * sin(rotation_speed)
-		+ camera->camera_plane_y * cos(rotation_speed);
+	camera->camera_plane_x = camera->camera_plane_x * cos(ROTATION_SPEED)
+		- camera->camera_plane_y * sin(ROTATION_SPEED);
+	camera->camera_plane_y = camera_plane_x_old * sin(ROTATION_SPEED)
+		+ camera->camera_plane_y * cos(ROTATION_SPEED);
 }
 
 int	move(t_game *game)
