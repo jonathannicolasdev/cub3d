@@ -4,15 +4,11 @@ LIBFTPATH = ./libft
 
 SRC_DIR = ./src/
 SRC =  main.c raycasting/init_raycasting.c raycasting/raycasting.c controller/game_loop.c controller/hook.c controller/move.c \
-		parsing/add.c \
 		parsing/cub.c \
-		parsing/error.c \
 		parsing/init_free.c \
 		parsing/map.c \
 		parsing/map_check.c \
-		parsing/other.c \
 		parsing/color_and_texture.c \
-		parsing/test_print.c \
 		parsing/parse.c \
 		parsing/parsing.c 
 

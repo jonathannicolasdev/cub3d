@@ -1,13 +1,13 @@
-WE       assets/wwall.xpm
+WE       ./test.xpm
 
-     NO assets/nwall.xpm
+     NO ./test.xpm
 
 F 255,255,0
 
-SO assets/swall.xpm
+SO ./test.xpm
 
 
-EA assets/ewall.xpm
+EA ./test.xpm
 
 C     255 ,  0     ,255                               
 

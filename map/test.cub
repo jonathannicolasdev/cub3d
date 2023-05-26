@@ -1,10 +1,12 @@
-NO ./cub3d.h
-SO ./cub3d.h
-WE ./cub3d.h
-EA ./cub3d.h
+NO     ./test.xpm      
+ SO  ./test.xpm 
+ 
+WE ./test.xpm 
+EA ./test.xpm 
 
-F      160,160,160
-C 0,128 , 255
+F 160,160,160 
+C  255 , 0 , 255
+
 
 11111111
 11111001111

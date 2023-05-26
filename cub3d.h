@@ -156,19 +156,6 @@ typedef struct s_color
 /*	----- PARSING STRUCT ----- */
 typedef struct	s_parse
 {
-	int north;
-	int south;
-	int west;
-	int east;
-	int floor;
-	int ceiling;
-	int map_wg_char;
-	int map_end;
-	int map_wall;
-	int map_dup;
-	int map_no_pos;
-	int no_map;
-	int wrong_line;
 	int	file_north;
 	int	file_south;
 	int	file_west;
@@ -181,17 +168,16 @@ typedef struct	s_parse
 	int	map_wg_space;
 	int map_wg_zero;
 	int	map_wg_character;
-
 }				t_parse;
 
 typedef struct	s_data
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*floor;
-	char	*ceiling;
+	char	*file_north;
+	char	*file_south;
+	char	*file_west;
+	char	*file_east;
+	char	*color_floor;
+	char	*color_ceiling;
 	char	**map;
 }				t_data;
 /*	----- PARSING STRUCT END ----- */

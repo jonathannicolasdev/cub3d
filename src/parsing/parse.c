@@ -12,6 +12,16 @@
 
 #include "../../cub3d.h"
 
+void print_data(const t_data *data)
+{
+    printf("file_north: %s\n", data->file_north);
+    printf("file_south: %s\n", data->file_south);
+    printf("file_west: %s\n", data->file_west);
+    printf("file_east: %s\n", data->file_east);
+    printf("color_floor: %s\n", data->color_floor);
+    printf("color_ceiling: %s\n", data->color_ceiling);
+}
+
 int	ft_parse_file(char *filename, char ***tab_ptr)
 {
 	char	**tab;
@@ -119,6 +129,7 @@ int	ft_parse(char **argv, t_map **map)
 	if (!data)
 		return (FAIL);
 	*map = create_map_from_data(data);
+	print_data(data);
 	free(data);
 	if (!(*map))
 		return (FAIL);

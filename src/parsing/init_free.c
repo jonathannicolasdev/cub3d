@@ -14,19 +14,6 @@
 
 t_parse	*init_struct(t_parse *parse)
 {
-	parse->north = 0;
-	parse->south = 0;
-	parse->west = 0;
-	parse->east = 0;
-	parse->floor = 0;
-	parse->ceiling = 0;
-	parse->map_wg_char = 0;
-	parse->map_end = 0;
-	parse->map_wall = 0;
-	parse->map_dup = 0;
-	parse->map_no_pos = 0;
-	parse->no_map = 0;
-	parse->wrong_line = 0;
 	parse->map_wg_player = 0;
 	parse->map_wg_player_number = 0;
 	parse->map_wg_space = 0;
@@ -57,12 +44,12 @@ char	**ft_free_tab(char **tab)
 
 t_data	*ft_free_data(t_data *data)
 {
-	free(data->north);
-	free(data->south);
-	free(data->west);
-	free(data->east);
-	free(data->floor);
-	free(data->ceiling);
+	free(data->file_north);
+	free(data->file_south);
+	free(data->file_west);
+	free(data->file_east);
+	free(data->color_floor);
+	free(data->color_ceiling);
 	data->map = ft_free_tab(data->map);
 	free(data);
 	return (data);
