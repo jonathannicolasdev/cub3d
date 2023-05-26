@@ -206,6 +206,8 @@ int	ft_error(t_parse *parse);
 int validate_color_string(char *str, int i);
 int validate_rgb_color(char *str, int i);
 char *ft_file_color(char *str);
+int is_valid_character(char c);
+int	is_valid_number(char *str, int i);
 
 /*	[parse_data_init_and_free.c]	- */
 t_parse	*init_struct(t_parse *parse);
