@@ -20,8 +20,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-
-/*	----- PARSING DEFINE INCLUDE ----- */
 # include "get_next_line/get_next_line.h"
 # include <unistd.h>
 # include <fcntl.h>
@@ -34,9 +32,6 @@
 # define FAIL 1
 # define FAIL_FD -1
 # define FAIL_CUB -2
-/*	----- PARSING DEFINE INCLUDE END ----- */
-
-
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
 # define X_EVENT_KEY_EXIT 17
@@ -96,16 +91,6 @@ typedef struct s_key
 	bool			right;
 }					t_key;
 
-/*
-typedef struct s_map
-{
-	char			**map;
-	int				width;
-	int				height;
-}					t_map;
-*/
-
-/*	----- PARSING STRUCT MODIFY MAP ----- */
 typedef struct s_map
 {
 	    int rows;
@@ -116,7 +101,6 @@ typedef struct s_map
 	float		player_x;
 	float		player_y;
 }					t_map;
-/*	----- PARSING STRUCT MODIFY MAP END ----- */
 
 typedef struct s_game
 {
@@ -153,7 +137,6 @@ typedef struct s_color
 	unsigned char	blank;
 }					t_color;
 
-/*	----- PARSING STRUCT ----- */
 typedef struct	s_parse
 {
 	int	file_north;
@@ -180,7 +163,6 @@ typedef struct	s_data
 	char	*color_ceiling;
 	char	**map;
 }				t_data;
-/*	----- PARSING STRUCT END ----- */
 
 t_map				*read_map(char *filename);
 t_camera			*init_camera(t_player *player);

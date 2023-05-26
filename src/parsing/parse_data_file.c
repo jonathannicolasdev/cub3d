@@ -52,26 +52,26 @@ int	ft_file(char *str)
 
 int ft_check_file(char *str)
 {
-	char *penis;
+	char *new;
 	int fd;
 
-	penis = ft_file_path(str);
-	if (penis == NULL)
+	new = ft_file_path(str);
+	if (new == NULL)
 	{
 		printf("Invalid file path.\n");
-		return 3;
+		return (3);
 	}
-	fd = open(penis, O_RDONLY);
-	free(penis);
+	fd = open(new, O_RDONLY);
+	free(new);
 	if (fd == -1)
 	{
 		printf("Failed to open file.\n");
-		return 3;
+		return (3);
 	}
 	if (fd == 3)
 	{
 		close(fd);
-		return 1;
+		return (1);
 	}
-	return 3;
+	return (3);
 }
