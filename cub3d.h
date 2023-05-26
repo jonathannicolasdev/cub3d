@@ -193,6 +193,8 @@ void				draw_background(t_game *game);
 int					game_loop(t_game *game);
 void				reset_camera(t_player *player);
 void				load_bitmap(t_game *info, int idx, char *path);
+void	draw_floor(t_game *game);
+void	draw_ceiling(t_game *game);
 
 /*	[map_struct_funct.c]	- */
 void	ft_map_player_position(t_map *data, char **map);

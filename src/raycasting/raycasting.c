@@ -46,12 +46,68 @@ void	draw_background(t_game *game)
 	{
 		return ;
 	}
-	*sss = convert_to_hexa(game->color_ceiling);
+	*sss = convert_to_hexa(game->color_floor);
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
 		j = 0;
 		while (j < SCREEN_HEIGHT)
+		{
+			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
+			*(unsigned int *)dst = *sss;
+			j++;
+		}
+		i++;
+	}
+	free(sss);
+}
+
+void	draw_ceiling(t_game *game)
+{
+	unsigned int	*sss;
+	int				i;
+	int				j;
+	char			*dst;
+
+	sss = malloc(sizeof(unsigned int));
+	if (sss == NULL)
+	{
+		return ;
+	}
+	*sss = convert_to_hexa(game->color_ceiling);
+	i = 0;
+	while (i < SCREEN_WIDTH)
+	{
+		j = SCREEN_HEIGHT / 2;
+		while (j < SCREEN_HEIGHT)
+		{
+			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
+			*(unsigned int *)dst = *sss;
+			j++;
+		}
+		i++;
+	}
+	free(sss);
+}
+
+void	draw_floor(t_game *game)
+{
+	unsigned int	*sss;
+	int				i;
+	int				j;
+	char			*dst;
+
+	sss = malloc(sizeof(unsigned int));
+	if (sss == NULL)
+	{
+		return ;
+	}
+	*sss = convert_to_hexa(game->color_floor);
+	i = 0;
+	while (i < SCREEN_WIDTH)
+	{
+		j = 0;
+		while (j < SCREEN_HEIGHT / 2)
 		{
 			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
 			*(unsigned int *)dst = *sss;

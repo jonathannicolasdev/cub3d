@@ -52,6 +52,12 @@ void map_to_game(t_map *map, t_game *game)
     game->color_floor = map->color_floor;
 }
 
+int close_window(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -76,6 +82,7 @@ int	main(int argc, char **argv)
 	init_key_press(game);
 	map_to_game(map, game);
 	mlx_hook(game->win, X_EVENT_KEY_PRESS, 0, key_press, game);
+	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_hook(game->win, X_EVENT_KEY_RELEASE, 0, key_release, game);
 	mlx_loop_hook(mlx, game_loop, game);
 	mlx_loop(mlx);
