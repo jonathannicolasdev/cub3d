@@ -27,6 +27,7 @@ void	ft_map_player_position(t_map *data, char **map)
 			if (map[actual][i] == 'N' || map[actual][i] == 'S'
 				|| map[actual][i] == 'W' || map[actual][i] == 'E')
 			{
+				data->nswe = map[actual][i];
 				data->player_x = i + 0.5;
 				data->player_y = actual + 0.5;
 			}

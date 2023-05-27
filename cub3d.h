@@ -107,6 +107,7 @@ typedef struct s_map
 	char	*file_east;
 	char	*color_floor;
 	char	*color_ceiling;
+	char	nswe;
 }					t_map;
 
 typedef struct s_game

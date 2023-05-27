@@ -31,7 +31,7 @@ t_game	*init_game(void *mlx, t_map *map)
 	t_player	*player;
 
 	game = malloc(sizeof(t_game));
-	//map = read_map("");
+	printf("map positoon = %c\n", map->nswe);
 	game->map = map;
 	game->mlx = mlx;
 	player = init_player(map->player_y, map->player_x, -1, 0);
