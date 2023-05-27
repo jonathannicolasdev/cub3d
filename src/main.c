@@ -25,16 +25,33 @@ int	init_key_press(t_game *game)
 	return (0);
 }
 
+int	ft_pos_ns(char pos)
+{
+	if (pos == 'N')
+		return (-1);
+	if (pos == 'S')
+		return (1);
+	return (0);
+}
+
+int	ft_pos_we(char pos)
+{
+	if (pos == 'W')
+		return (-1);
+	if (pos == 'E')
+		return (1);
+	return (0);
+}
+
 t_game	*init_game(void *mlx, t_map *map)
 {
 	t_game		*game;
 	t_player	*player;
 
 	game = malloc(sizeof(t_game));
-	printf("map positoon = %c\n", map->nswe);
 	game->map = map;
 	game->mlx = mlx;
-	player = init_player(map->player_y, map->player_x, -1, 0);
+	player = init_player(map->player_y, map->player_x, ft_pos_ns(map->nswe), ft_pos_we(map->nswe));
 	game->player = player;
 	game->player->camera = init_camera(player);
 	game->img.img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
