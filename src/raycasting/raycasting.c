@@ -216,7 +216,9 @@ void	perform_dda(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			side = 1;
 		}
-		if (map->map[ray->map_x][ray->map_y] != '0')
+		if (map->map[ray->map_x][ray->map_y] != '0' && map->map[ray->map_x][ray->map_y] != 'N'
+			 && map->map[ray->map_x][ray->map_y] != 'S'  && map->map[ray->map_x][ray->map_y] != 'E'
+			  && map->map[ray->map_x][ray->map_y] != 'W')
 			hit = 1;
 	}
 	if (side == 0)
