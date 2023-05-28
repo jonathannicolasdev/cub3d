@@ -26,6 +26,7 @@ t_parse	*init_struct(t_parse *parse)
 	parse->file_floor = 0;
 	parse->file_ceiling = 0;
 	parse->file_wrong_line = 0;
+	parse->map_wg_corner = 0;
 	return (parse);
 }
 
@@ -51,4 +52,14 @@ t_data	*ft_free_data(t_data *data)
 	data->map = ft_free_tab(data->map);
 	free(data);
 	return (data);
+}
+
+void	ft_free_map(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab && tab[i])
+		free(tab[i++]);
+	free(tab);
 }

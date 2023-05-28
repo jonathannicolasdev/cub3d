@@ -21,7 +21,8 @@ SRC =  main.c \
 		parsing/data_to_struct.c \
 		parsing/parse_data_print_struct.c \
 		parsing/parse_data_start.c \
-		parsing/parse_step.c
+		parsing/parse_step.c \
+		parsing/parse_map_corner.c
 
 OBJS = ${addprefix ${SRC_DIR}, ${SRC:.c=.o}}
 

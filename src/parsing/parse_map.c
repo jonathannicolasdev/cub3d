@@ -19,6 +19,8 @@ void	ft_map_check(t_parse *parse, char **map, int actual, int y)
 	i = 0;
 	while (map[actual][i] != '\0')
 	{
+		if (ft_map_corner(map, actual, i) == 1)
+			parse->map_wg_corner = 1;
 		if (ft_map_char(map, actual, i) == 1)
 			parse->map_wg_character = 1;
 		if (ft_map_space(map, actual, i, y) == 1)
