@@ -20,15 +20,13 @@ int	gnl_check_new_line(char *str, char c)
 	while (str && str[i])
 	{
 		if (str[i] == c)
-		{
 			return (1);
-		}
 		i++;
 	}
 	return (0);
 }
 
-int	gnl_strlen(char *str, char c)
+int	sl(char *str, char c)
 {
 	int	i;
 
@@ -36,9 +34,7 @@ int	gnl_strlen(char *str, char c)
 	while (str && str[i])
 	{
 		if (str[i] == c)
-		{
 			return (i);
-		}
 		i++;
 	}
 	return (i);
@@ -52,19 +48,16 @@ char	*gnl_strjoin(char *s1, char *s2)
 
 	i = 0;
 	k = 0;
-	if (!(new = malloc(sizeof(char) * gnl_strlen(s1, '\0') + gnl_strlen(s2, '\0') + 1)))
-	{
+	new = malloc(sizeof(char) * sl(s1, '\0') + sl(s2, '\0') + 1);
+	if (!new)
 		return (NULL);
-	}
 	while (s1 && s1[i])
 	{
 		new[i] = s1[i];
 		i++;
 	}
 	while (s2 && s2[k])
-	{
 		new[i++] = s2[k++];
-	}
 	new[i] = '\0';
 	free(s1);
 	return (new);
@@ -76,10 +69,9 @@ char	*gnl_strdup(char *buffer, char c)
 	int		i;
 
 	i = 0;
-	if (!(new = malloc(sizeof(char) * gnl_strlen(buffer, c) + 1)))
-	{
+	new = malloc(sizeof(char) * sl(buffer, c) + 1);
+	if (!new)
 		return (NULL);
-	}
 	while (buffer && buffer[i] && buffer[i] != c)
 	{
 		new[i] = buffer[i];
@@ -95,17 +87,11 @@ char	*gnl_strcut(char *buffer, char c)
 
 	i = 0;
 	if (!(buffer))
-	{
 		return (NULL);
-	}
 	if (gnl_check_new_line(buffer, c) == 0)
-	{
 		return (NULL);
-	}
 	while (buffer[i] != c)
-	{
 		i++;
-	}
 	i++;
 	return (gnl_strdup(buffer + i, '\0'));
 }

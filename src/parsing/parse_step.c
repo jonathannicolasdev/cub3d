@@ -18,7 +18,6 @@ int	ft_parsing_second(t_parse *parse, char **data, char **map)
 	parse = ft_map(parse, map);
 	map = ft_free_tab(map);
 	data = ft_free_tab(data);
-	//print_struct(parse);
 	if (ft_error(parse) == 1)
 	{
 		free(parse);
