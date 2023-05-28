@@ -62,7 +62,7 @@ void	draw_background(t_game *game)
 	free(sss);
 }
 
-void	draw_ceiling(t_game *game)
+void	draw_floor(t_game *game)
 {
 	unsigned int	*sss;
 	int				i;
@@ -74,7 +74,7 @@ void	draw_ceiling(t_game *game)
 	{
 		return ;
 	}
-	*sss = convert_to_hexa(game->color_ceiling);
+	*sss = convert_to_hexa(game->color_floor);
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{
@@ -90,7 +90,7 @@ void	draw_ceiling(t_game *game)
 	free(sss);
 }
 
-void	draw_floor(t_game *game)
+void	draw_ceiling(t_game *game)
 {
 	unsigned int	*sss;
 	int				i;
@@ -102,7 +102,7 @@ void	draw_floor(t_game *game)
 	{
 		return ;
 	}
-	*sss = convert_to_hexa(game->color_floor);
+	*sss = convert_to_hexa(game->color_ceiling);
 	i = 0;
 	while (i < SCREEN_WIDTH)
 	{

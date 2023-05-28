@@ -1,29 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylabbe <ylabbe@student.42quebec.c>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/28 15:37:47 by ylabbe            #+#    #+#             */
+/*   Updated: 2023/05/28 15:47:17 by ylabbe           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
+
+char	*get_next_token(char **nexttoken, const char *delim)
+{
+	char	*currenttoken;
+
+	currenttoken = *nexttoken;
+	while (**nexttoken != '\0' && ft_strchr(delim, **nexttoken) != NULL)
+		(*nexttoken)++;
+	if (**nexttoken == '\0')
+	{
+		*nexttoken = NULL;
+		return (NULL);
+	}
+	currenttoken = *nexttoken;
+	while (**nexttoken != '\0' && ft_strchr(delim, **nexttoken) == NULL)
+		(*nexttoken)++;
+	if (**nexttoken == '\0')
+		*nexttoken = NULL;
+	else
+	{
+		**nexttoken = '\0';
+		(*nexttoken)++;
+	}
+	return (currenttoken);
+}
 
 char	*ft_strtok(char *str, const char *delim)
 {
-	static char *nextToken = NULL;
+	static char	*nexttoken = NULL;
 
 	if (str != NULL)
-		nextToken = str;
-	if (nextToken == NULL)
+		nexttoken = str;
+	if (nexttoken == NULL)
 		return (NULL);
-	while (*nextToken != '\0' && ft_strchr(delim, *nextToken) != NULL)
-		nextToken++;
-	if (*nextToken == '\0')
-	{
-		nextToken = NULL;
-		return (NULL);
-	}
-	char *currentToken = nextToken;
-	while (*nextToken != '\0' && ft_strchr(delim, *nextToken) == NULL)
-		nextToken++;
-	if (*nextToken == '\0')
-		nextToken = NULL;
-	else
-	{
-		*nextToken = '\0';
-		nextToken++;
-	}
-	return (currentToken);
+	return (get_next_token(&nexttoken, delim));
 }
