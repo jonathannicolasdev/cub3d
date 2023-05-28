@@ -259,4 +259,7 @@ int	ft_space(char *str);
 void print_struct(t_parse *parse);
 void print_data(const t_data *data);
 
+void free_game(t_game *game);
+
+
 #endif

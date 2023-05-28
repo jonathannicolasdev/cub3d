@@ -236,6 +236,8 @@ void	perform_column_raycasting(t_player *player, t_camera *camera,
 	ray = init_ray(player, camera, x);
 	perform_dda(ray, game->map);
 	draw_column(x, ray, game->map, game);
+	free(ray);
+
 }
 
 void	perform_raycasting(t_player *player, t_game *game)

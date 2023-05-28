@@ -28,8 +28,7 @@ int	key_press(int keycode, t_game *game)
 		game->key.right = true;
 	else if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(game->mlx, game->win);
-		exit(0);
+		free_game(game);
 	}
 	return (0);
 }

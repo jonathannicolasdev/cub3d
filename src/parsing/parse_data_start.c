@@ -97,7 +97,7 @@ int	ft_parse(char **argv, t_map **map)
 	if (!data)
 		return (FAIL);
 	*map = create_map_from_data(data);
-	free(data);
+	//free(data);
 	if (!(*map))
 		return (FAIL);
 	ft_map_player_position(*map, (*map)->map);

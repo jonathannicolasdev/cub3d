@@ -63,6 +63,23 @@ t_game	*init_game(void *mlx, t_map *map)
 	return (game);
 }
 
+void free_game(t_game *game)
+{
+	//free(game->camera);
+	free(game->player);
+	mlx_destroy_image(game->mlx, game->img.img);
+	free(game->map->color_ceiling);
+	free(game->map->color_floor);
+	free(game->map->file_east);
+	free(game->map->file_north);
+	free(game->map->file_south);
+	free(game->map->file_west);
+	free(game->map);
+	free(game);
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
+}
+
 void map_to_game(t_map *map, t_game *game)
 {
     game->color_ceiling = map->color_ceiling;
@@ -71,8 +88,8 @@ void map_to_game(t_map *map, t_game *game)
 
 int close_window(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
+	free_game(game);
+	return (0);
 }
 
 int	main(int argc, char **argv)
