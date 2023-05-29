@@ -21,10 +21,8 @@ char	*ft_file_color(char *str)
 {
 	char	*result;
 	int		index;
-	int		count;
 
 	index = 0;
-	count = 0;
 	result = malloc(sizeof(char) * ft_strlen(str));
 	if (!result)
 		return (NULL);
@@ -32,7 +30,6 @@ char	*ft_file_color(char *str)
 	{
 		if (is_valid_character(*str))
 		{
-			count++;
 			result[index++] = *str;
 		}
 		str++;
