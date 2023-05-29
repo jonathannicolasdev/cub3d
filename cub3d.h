@@ -288,6 +288,10 @@ int					ft_space(char *str);
 void				print_struct(t_parse *parse);
 void				print_data(const t_data *data);
 
+/*	[parse_data_file_utils.c] -	*/
+char	ft_isalpha_or_point(const char *line);
+int	ft_after_line(const char *line);
+
 void				calculate_texture_coordinates(t_ray *ray, t_tex *tex,
 						t_map *map, double *step);
 void				draw_ceiling(t_game *game);
