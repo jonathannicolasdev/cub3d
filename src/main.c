@@ -65,7 +65,6 @@ t_game	*init_game(void *mlx, t_map *map)
 
 void free_game(t_game *game)
 {
-	//free(game->camera);
 	free(game->player);
 	mlx_destroy_image(game->mlx, game->img.img);
 	free(game->map->color_ceiling);
@@ -74,7 +73,7 @@ void free_game(t_game *game)
 	free(game->map->file_north);
 	free(game->map->file_south);
 	free(game->map->file_west);
-	free(game->map);
+	ft_free_map(game->map->map);
 	free(game);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
@@ -101,12 +100,11 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		printf("Error! *main return*\n");
+		printf("Error\nArgument problem\n");
 		return (1);
 	}
 	if (ft_parse(argv, &map) != 0)
 	{
-		printf("Error! *main return*\n");
 		return (1);
 	}
 	mlx = mlx_init();

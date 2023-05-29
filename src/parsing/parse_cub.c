@@ -19,7 +19,7 @@ int	ft_fd_cub(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("Error Message: File Descriptor Error\n");
+		printf("Error\nFile problem\n");
 		return (-1);
 	}
 	else if (ft_cub(file) == 1)
@@ -41,6 +41,6 @@ int	ft_cub(char *argv)
 		}
 		i++;
 	}
-	printf("Error message: File does not have a .cub extension.\n");
+	printf("Error\nExtension problem\n");
 	return (FAIL);
 }

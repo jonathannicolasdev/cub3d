@@ -69,14 +69,14 @@ int	ft_error(t_parse *parse)
 		|| parse->file_ceiling != 1 || parse->file_floor != 1
 		|| parse->file_wrong_line != 0)
 	{
-		printf("Couleur/Texture en double!?\n");
+		printf("Error\nColor or/and texture problem\n");
 		return (1);
 	}
 	if (parse->map_wg_player != 0 || parse->map_wg_player_number != 0
 		|| parse->map_wg_space != 0 || parse->map_wg_zero != 0
-		|| parse->map_wg_character != 0)
+		|| parse->map_wg_character != 0 || parse->map_wg_corner != 0)
 	{
-		printf("La map cause problème mon pote.\n");
+		printf("Error\nMap problem\n");
 		return (1);
 	}
 	return (0);
