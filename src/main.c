@@ -63,20 +63,30 @@ t_game	*init_game(void *mlx, t_map *map)
 	return (game);
 }
 
+void free_img(t_img *image, t_game *game) {
+    if (image != NULL) {
+        if (image->img != NULL)
+            mlx_destroy_image(game, image->img);
+        free(image);
+    }
+}
+
 void free_game(t_game *game)
 {
-	free(game->player);
-	mlx_destroy_image(game->mlx, game->img.img);
-	free(game->map->color_ceiling);
-	free(game->map->color_floor);
-	free(game->map->file_east);
-	free(game->map->file_north);
-	free(game->map->file_south);
-	free(game->map->file_west);
-	ft_free_map(game->map->map);
-	free(game);
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
+ //   free_img(&game->img, game->mlx);
+    free(game->player);
+    mlx_destroy_image(game->mlx, game->img.img);
+    free(game->map->color_ceiling);
+    free(game->map->color_floor);
+    free(game->map->file_east);
+    free(game->map->file_north);
+    free(game->map->file_south);
+    free(game->map->file_west);
+    ft_free_map(game->map->map);
+    free(game);
+//	free(&game->img);
+    mlx_destroy_window(game->mlx, game->win);
+    exit(0);
 }
 
 void map_to_game(t_map *map, t_game *game)

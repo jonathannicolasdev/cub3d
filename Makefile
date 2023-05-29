@@ -28,7 +28,8 @@ CFILES     = main.c \
              parsing/parse_data_print_struct.c \
              parsing/parse_data_start.c \
              parsing/parse_step.c \
-             parsing/parse_map_corner.c
+             parsing/parse_map_corner.c \
+             parsing/parse_data_file_utils.c
 
 GNL_FILES  = get_next_line.c \
              get_next_line_utils.c

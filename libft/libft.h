@@ -57,5 +57,7 @@ char	*ft_pstrdup(char *buffer, char c);
 char	*ft_pstrjoin(char *s1, char *s2);
 char	*ft_pstrdup(char *buffer, char c);
 char	*ft_strtok(char *str, const char *delim);
+char	*ft_char_strstr(const char *haystack, const char *needle);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
 
 #endif

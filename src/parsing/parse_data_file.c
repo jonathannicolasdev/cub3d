@@ -26,15 +26,17 @@ char	*ft_file_path(const char *line)
 	size_t	filepath_length;
 	char	*filepath;
 
-	start = strchr(line, '.');
+	if (ft_after_line(line) == 1)
+		return (NULL);
+	start = ft_strchr(line, ft_isalpha_or_point(line));
 	if (start != NULL)
 	{
-		end = strstr(start, ".xpm");
+		end = ft_char_strstr(start, ".xpm");
 		if (end != NULL && end > start)
 		{
 			filepath_length = end - start + 4;
-			filepath = (char *)malloc((filepath_length + 1) * sizeof(char));
-			strncpy(filepath, start, filepath_length);
+			filepath = malloc((filepath_length + 1) * sizeof(char));
+			ft_strncpy(filepath, start, filepath_length);
 			filepath[filepath_length] = '\0';
 			return (filepath);
 		}
