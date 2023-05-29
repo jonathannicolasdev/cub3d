@@ -53,6 +53,13 @@
 # define BLUE 0x0000FF
 # define BLACK 0x00000
 
+typedef struct s_rgb
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+}	t_rgb;
+
 typedef struct s_img
 {
 	void			*img;
@@ -288,5 +295,7 @@ void				draw_floor(t_game *game);
 void				draw_background(t_game *game);
 unsigned int		convert_to_hexa(const char *rgb);
 void				free_game(t_game *game);
+void				set_side_perpwalldist(t_ray *ray, int *side);
+
 
 #endif

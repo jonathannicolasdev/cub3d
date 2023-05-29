@@ -87,11 +87,7 @@ void	perform_dda(t_ray *ray, t_map *map)
 				&& current_tile != 'E' && current_tile != 'W')
 			hit = 1;
 	}
-	if (side == 0)
-		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
-	else
-		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
-	ray->side = side;
+	set_side_perpwalldist(ray, &side);
 }
 
 void	perform_column_raycasting(t_player *player, t_camera *camera,

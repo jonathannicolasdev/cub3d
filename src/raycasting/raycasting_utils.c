@@ -20,19 +20,18 @@ unsigned int	convert_to_hexa(const char *rgb)
 	char			*token;
 	char			*rgb_copy;
 	unsigned int	hex_value;
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	t_rgb			color;
 
 	rgb_copy = ft_strdup(rgb);
 	token = ft_strtok(rgb_copy, ",");
-	r = ft_atoi(token);
+	color.r = ft_atoi(token);
 	token = ft_strtok(NULL, ",");
-	g = ft_atoi(token);
+	color.g = ft_atoi(token);
 	token = ft_strtok(NULL, ",");
-	b = ft_atoi(token);
+	color.b = ft_atoi(token);
 	free(rgb_copy);
-	hex_value = ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+	hex_value = ((color.r & 0xFF) << 16) | \
+	((color.g & 0xFF) << 8) | (color.b & 0xFF);
 	return (hex_value);
 }
 

@@ -12,6 +12,7 @@ CFILES     = main.c \
              raycasting/init_raycasting.c \
              raycasting/raycasting.c \
 			 raycasting/raycasting_utils.c \
+             raycasting/raycasting_utils_part2.c \
              controller/game_loop.c \
              controller/hook.c \
              controller/move.c \
