@@ -78,7 +78,7 @@ int	main(int argc, char **argv)
 	if (ft_parse(argv, &map) != 0)
 		return (1);
 	mlx = mlx_init();
-	win_ptr = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+	win_ptr = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	game = init_game(mlx, map);
 	game->win = win_ptr;
 	init_key_press(game);
