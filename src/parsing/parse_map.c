@@ -35,11 +35,9 @@ void	ft_map_check(t_parse *parse, char **map, int actual, int y)
 
 t_parse	*ft_map(t_parse *parse, char **map)
 {
-	int	i;
 	int	actual;
 	int	y;
 
-	i = 0;
 	actual = 0;
 	y = 0;
 	if (ft_map_total_position(map) == 1)
