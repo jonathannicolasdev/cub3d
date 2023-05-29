@@ -58,7 +58,7 @@ typedef struct s_rgb
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
-}	t_rgb;
+}					t_rgb;
 
 typedef struct s_img
 {
@@ -164,20 +164,20 @@ typedef struct s_color
 
 typedef struct s_parse
 {
-	int	file_north;
-	int	file_south;
-	int	file_west;
-	int	file_east;
-	int	file_floor;
-	int	file_ceiling;
-	int	file_wrong_line;
-	int	map_wg_player;
-	int	map_wg_player_number;
-	int	map_wg_space;
-	int map_wg_zero;
-	int	map_wg_character;
-	int	map_wg_corner;
-}				t_parse;
+	int				file_north;
+	int				file_south;
+	int				file_west;
+	int				file_east;
+	int				file_floor;
+	int				file_ceiling;
+	int				file_wrong_line;
+	int				map_wg_player;
+	int				map_wg_player_number;
+	int				map_wg_space;
+	int				map_wg_zero;
+	int				map_wg_character;
+	int				map_wg_corner;
+}					t_parse;
 
 typedef struct s_data
 {
@@ -250,10 +250,10 @@ int					is_valid_character(char c);
 int					is_valid_number(char *str, int i);
 
 /*	[parse_data_init_and_free.c]	- */
-t_parse	*init_struct(t_parse *parse);
-t_data	*ft_free_data(t_data *data);
-char	**ft_free_tab(char **tab);
-void	ft_free_map(char **tab);
+t_parse				*init_struct(t_parse *parse);
+t_data				*ft_free_data(t_data *data);
+char				**ft_free_tab(char **tab);
+void				ft_free_map(char **tab);
 
 /*	[parse_cub.c]	- */
 int					ft_fd_cub(char *file);
@@ -264,11 +264,11 @@ void				ft_map_check(t_parse *parse, char **map, int actual, int y);
 t_parse				*ft_map(t_parse *parse, char **map);
 
 /*	[parse_map_corner.c] - */
-int	ft_map_corner(char **map, int actual, int i);
-int	ft_map_corner_top_left(char **map, int actual, int i);
-int	ft_map_corner_bot_left(char **map, int actual, int i);
-int	ft_map_corner_bot_rigth(char **map, int actual, int i);
-int	ft_map_corner_top_rigth(char **map, int actual, int i);
+int					ft_map_corner(char **map, int actual, int i);
+int					ft_map_corner_top_left(char **map, int actual, int i);
+int					ft_map_corner_bot_left(char **map, int actual, int i);
+int					ft_map_corner_bot_rigth(char **map, int actual, int i);
+int					ft_map_corner_top_rigth(char **map, int actual, int i);
 
 /*	[parse_map_funct.c]	-	*/
 int					ft_map_player(char **map, int actual, int i, int y);
@@ -289,8 +289,8 @@ void				print_struct(t_parse *parse);
 void				print_data(const t_data *data);
 
 /*	[parse_data_file_utils.c] -	*/
-char	ft_isalpha_or_point(const char *line);
-int	ft_after_line(const char *line);
+char				ft_isalpha_or_point(const char *line);
+int					ft_after_line(const char *line);
 
 void				calculate_texture_coordinates(t_ray *ray, t_tex *tex,
 						t_map *map, double *step);
@@ -301,5 +301,9 @@ unsigned int		convert_to_hexa(const char *rgb);
 void				free_game(t_game *game);
 void				set_side_perpwalldist(t_ray *ray, int *side);
 
+int					init_key_press(t_game *game);
+int					ft_pos_ns(char pos);
+int					ft_pos_we(char pos);
+void				free_img(t_img *image, t_game *game);
 
 #endif

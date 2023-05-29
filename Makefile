@@ -9,6 +9,7 @@ OBJDIR     = obj
 GNL_DIR    = get_next_line
 
 CFILES     = main.c \
+             main_utils.c\
              raycasting/init_raycasting.c \
              raycasting/raycasting.c \
 			 raycasting/raycasting_utils.c \
