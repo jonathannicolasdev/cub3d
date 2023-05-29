@@ -36,6 +36,7 @@ t_game	*init_game(void *mlx, t_map *map)
 
 void	free_game(t_game *game)
 {
+	free(game->player->camera);
 	free(game->player);
 	mlx_destroy_image(game->mlx, game->img.img);
 	free(game->map->color_ceiling);
@@ -45,8 +46,8 @@ void	free_game(t_game *game)
 	free(game->map->file_south);
 	free(game->map->file_west);
 	ft_free_map(game->map->map);
-	free(game);
 	mlx_destroy_window(game->mlx, game->win);
+	free(game);
 	exit(0);
 }
 

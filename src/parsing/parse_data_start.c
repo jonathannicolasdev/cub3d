@@ -98,5 +98,6 @@ int	ft_parse(char **argv, t_map **map)
 		return (FAIL);
 	ft_map_player_position(*map, (*map)->map);
 	store_file_paths(*map, data);
+	free(data);
 	return (SUCCESS);
 }
