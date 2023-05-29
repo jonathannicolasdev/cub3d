@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 	void	*win_ptr;
 	t_map	*map;
 
-	if (argc == 1)
+	if (argc == 1 || argc > 2)
 	{
 		printf("Error\nArgument problem\n");
 		return (1);
