@@ -4,7 +4,7 @@ LDFLAGS    = -L./libft -lft
 LINKS      = -framework OpenGL -framework AppKit
 NAME       = cub3D
 
-SRCDIR     = src
+SRCDIR     = ./src
 OBJDIR     = obj
 GNL_DIR    = get_next_line
 

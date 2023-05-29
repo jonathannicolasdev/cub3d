@@ -1,11 +1,13 @@
+
+ F 0,255,0
+C 0,0,255
+
+WE ./bitmaps/west_test.xpm    
+EA ./bitmaps/east_test.xpm 
+
 NO     ./bitmaps/north_test.xpm       
  SO  ./bitmaps/south_test.xpm 
- 
-WE ./bitmaps/west_test.xpm    
-EA ./bitmaps/east_test.xpm       
-
-F 160,160,160
-C 0,128,255
+       
 
         1111111111111111111111111
         1000000000110000000000001
