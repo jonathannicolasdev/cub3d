@@ -47,7 +47,7 @@ NC         = \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJS) $(GNL_OBJS)
-	@cd libft && make
+	@cd libft && make -s
 	@cd minilibx_opengl && make -s
 	@echo "$(YELLOW)Linking objects...$(NC)"
 	@$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(GNL_OBJS) ./libft/libft.a ./minilibx_opengl/libmlx.a $(LINKS) -o $@
