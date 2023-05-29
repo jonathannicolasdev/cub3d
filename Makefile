@@ -6,6 +6,7 @@ SRC_DIR = ./src/
 SRC =  main.c \
 		raycasting/init_raycasting.c \
 		raycasting/raycasting.c \
+		raycasting/raycasting_utils.c \
 		controller/game_loop.c \
 		controller/hook.c \
 		controller/move.c \

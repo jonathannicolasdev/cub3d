@@ -6,7 +6,7 @@
 /*   By: jnicolas <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 19:05:46 by jnicolas          #+#    #+#             */
-/*   Updated: 2023/05/25 19:07:12 by jnicolas         ###   ########.fr       */
+/*   Updated: 2023/05/28 19:57:43 by jnicolas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,138 +15,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-unsigned int	convert_to_hexa(const char *rgb)
-{
-	char			*token;
-	char			*rgbCopy;
-	unsigned int	hexValue;
-
-	rgbCopy = ft_strdup(rgb);
-	unsigned int r, g, b;
-	token = ft_strtok(rgbCopy, ",");
-	r = ft_atoi(token);
-	token = ft_strtok(NULL, ",");
-	g = ft_atoi(token);
-	token = ft_strtok(NULL, ",");
-	b = ft_atoi(token);
-	free(rgbCopy);
-	hexValue = ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
-	return (hexValue);
-}
-
-void	draw_background(t_game *game)
-{
-	unsigned int	*sss;
-	int				i;
-	int				j;
-	char			*dst;
-
-	sss = malloc(sizeof(unsigned int));
-	if (sss == NULL)
-	{
-		return ;
-	}
-	*sss = convert_to_hexa(game->color_floor);
-	i = 0;
-	while (i < SCREEN_WIDTH)
-	{
-		j = 0;
-		while (j < SCREEN_HEIGHT)
-		{
-			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
-			*(unsigned int *)dst = *sss;
-			j++;
-		}
-		i++;
-	}
-	free(sss);
-}
-
-void	draw_floor(t_game *game)
-{
-	unsigned int	*sss;
-	int				i;
-	int				j;
-	char			*dst;
-
-	sss = malloc(sizeof(unsigned int));
-	if (sss == NULL)
-	{
-		return ;
-	}
-	*sss = convert_to_hexa(game->color_floor);
-	i = 0;
-	while (i < SCREEN_WIDTH)
-	{
-		j = SCREEN_HEIGHT / 2;
-		while (j < SCREEN_HEIGHT)
-		{
-			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
-			*(unsigned int *)dst = *sss;
-			j++;
-		}
-		i++;
-	}
-	free(sss);
-}
-
-void	draw_ceiling(t_game *game)
-{
-	unsigned int	*sss;
-	int				i;
-	int				j;
-	char			*dst;
-
-	sss = malloc(sizeof(unsigned int));
-	if (sss == NULL)
-	{
-		return ;
-	}
-	*sss = convert_to_hexa(game->color_ceiling);
-	i = 0;
-	while (i < SCREEN_WIDTH)
-	{
-		j = 0;
-		while (j < SCREEN_HEIGHT / 2)
-		{
-			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
-			*(unsigned int *)dst = *sss;
-			j++;
-		}
-		i++;
-	}
-	free(sss);
-}
-
-/*
-void	draw_background(t_game *game)
-{
-	char	*dst;
-	int		i;
-	int		j;
-
-	
-	i = 0;
-	while (i < SCREEN_WIDTH)
-	{
-		j = 0;
-		while (j < SCREEN_HEIGHT)
-		{
-			dst = game->img.addr + j * game->img.len + i * (game->img.bpp / 8);
-			*(unsigned int *)dst = BLACK;
-			j++;
-		}
-		i++;
-	}
-}
-*/
-
 void	calculate_column_param(t_ray *ray, t_game *game)
 {
-	if (ray->side == 1)
-		ray->direction = (ray->step_y < 0) ? 0 : 1;
-	else
-		ray->direction = (ray->step_x > 0) ? 2 : 3;
+	ray->direction = (!ray->side) * (2 + (ray->step_x > 0)) + \
+	ray->side * (ray->step_y < 0);
 	ray->line_height = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = -ray->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (ray->draw_start < 0)
@@ -165,41 +37,35 @@ void	calculate_column_param(t_ray *ray, t_game *game)
 
 void	draw_column(int x, t_ray *ray, t_map *map, t_game *game)
 {
+	t_tex	*tex;
 	int		color;
 	int		j;
 	char	*dst;
+	double	step;
 
-	int tex_x, tex_y;
-	int TEX_WID, TEX_HEI;
-	double step, tex_pos;
+	tex = malloc(sizeof(*tex));
 	calculate_column_param(ray, game);
-	TEX_WID = map->img->wid;
-	TEX_HEI = map->img->hei;
+	calculate_texture_coordinates(ray, tex, map, &step);
 	j = ray->draw_start;
-	tex_x = (int)(ray->wall_x * (double)TEX_WID);
-	step = 1.0 * TEX_HEI / ray->line_height;
-	tex_pos = (ray->draw_start - (SCREEN_HEIGHT / 2 - ray->line_height / 2))
-		* step;
-	if ((ray->side == 0 && ray->ray_dir_x > 0) || (ray->side == 1
-			&& ray->ray_dir_y < 0))
-		tex_x = TEX_WID - tex_x - 1;
 	while (j <= ray->draw_end)
 	{
-		tex_y = (int)tex_pos & (TEX_HEI - 1);
-		tex_pos += step;
-		color = *(unsigned int *)(game->map->img[ray->direction].addr + tex_y
-				* game->map->img[ray->direction].len + tex_x
+		tex->y = (int)tex->tex_pos & (tex->tex_height - 1);
+		tex->tex_pos += step;
+		color = *(unsigned int *)(game->map->img[ray->direction].addr + tex->y
+				* game->map->img[ray->direction].len + tex->x
 				* (game->map->img[ray->direction].bpp / 8));
 		dst = game->img.addr + j * game->img.len + x * (game->img.bpp / 8);
 		*(unsigned int *)dst = color;
 		j++;
 	}
+	free(tex);
 }
 
 void	perform_dda(t_ray *ray, t_map *map)
 {
-	int	hit;
-	int	side;
+	int		hit;
+	int		side;
+	char	current_tile;
 
 	hit = 0;
 	while (hit == 0)
@@ -216,9 +82,9 @@ void	perform_dda(t_ray *ray, t_map *map)
 			ray->map_y += ray->step_y;
 			side = 1;
 		}
-		if (map->map[ray->map_x][ray->map_y] != '0' && map->map[ray->map_x][ray->map_y] != 'N'
-			 && map->map[ray->map_x][ray->map_y] != 'S'  && map->map[ray->map_x][ray->map_y] != 'E'
-			  && map->map[ray->map_x][ray->map_y] != 'W')
+		current_tile = map->map[ray->map_x][ray->map_y];
+		if (current_tile != '0' && current_tile != 'N' && current_tile != 'S' \
+				&& current_tile != 'E' && current_tile != 'W')
 			hit = 1;
 	}
 	if (side == 0)
@@ -237,7 +103,6 @@ void	perform_column_raycasting(t_player *player, t_camera *camera,
 	perform_dda(ray, game->map);
 	draw_column(x, ray, game->map, game);
 	free(ray);
-
 }
 
 void	perform_raycasting(t_player *player, t_game *game)

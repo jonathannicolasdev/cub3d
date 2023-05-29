@@ -13,16 +13,16 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 # include "minilibx_opengl/mlx.h"
+# include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include "get_next_line/get_next_line.h"
 # include <unistd.h>
-# include <fcntl.h>
 # define NORTH 'N'
 # define SOUTH 'S'
 # define WEST 'W'
@@ -93,21 +93,21 @@ typedef struct s_key
 
 typedef struct s_map
 {
-	    int rows;
-    int columns;
+	int				rows;
+	int				columns;
 	char			**map;
 	int				width;
 	int				height;
 	t_img			img[4];
-	float		player_x;
-	float		player_y;
-	char	*file_north;
-	char	*file_south;
-	char	*file_west;
-	char	*file_east;
-	char	*color_floor;
-	char	*color_ceiling;
-	char	nswe;
+	float			player_x;
+	float			player_y;
+	char			*file_north;
+	char			*file_south;
+	char			*file_west;
+	char			*file_east;
+	char			*color_floor;
+	char			*color_ceiling;
+	char			nswe;
 }					t_map;
 
 typedef struct s_game
@@ -119,8 +119,8 @@ typedef struct s_game
 	t_map			*map;
 	t_key			key;
 	t_img			img;
-	char	*color_floor;
-	char	*color_ceiling;
+	char			*color_floor;
+	char			*color_ceiling;
 }					t_game;
 
 typedef struct s_ray
@@ -143,7 +143,6 @@ typedef struct s_ray
 	int				draw_end;
 	double			wall_x;
 	int				line_height;
-
 }					t_ray;
 
 typedef struct s_color
@@ -154,32 +153,41 @@ typedef struct s_color
 	unsigned char	blank;
 }					t_color;
 
-typedef struct	s_parse
+typedef struct s_parse
 {
-	int	file_north;
-	int	file_south;
-	int	file_west;
-	int	file_east;
-	int	file_floor;
-	int	file_ceiling;
-	int	file_wrong_line;
-	int	map_wg_player;
-	int	map_wg_player_number;
-	int	map_wg_space;
-	int map_wg_zero;
-	int	map_wg_character;
-}				t_parse;
+	int				file_north;
+	int				file_south;
+	int				file_west;
+	int				file_east;
+	int				file_floor;
+	int				file_ceiling;
+	int				file_wrong_line;
+	int				map_wg_player;
+	int				map_wg_player_number;
+	int				map_wg_space;
+	int				map_wg_zero;
+	int				map_wg_character;
+}					t_parse;
 
-typedef struct	s_data
+typedef struct s_data
 {
-	char	*file_north;
-	char	*file_south;
-	char	*file_west;
-	char	*file_east;
-	char	*color_floor;
-	char	*color_ceiling;
-	char	**map;
-}				t_data;
+	char			*file_north;
+	char			*file_south;
+	char			*file_west;
+	char			*file_east;
+	char			*color_floor;
+	char			*color_ceiling;
+	char			**map;
+}					t_data;
+
+typedef struct tex
+{
+	int				x;
+	int				y;
+	int				tex_width;
+	int				tex_height;
+	double			tex_pos;
+}					t_tex;
 
 t_map				*read_map(char *filename);
 t_camera			*init_camera(t_player *player);
@@ -189,77 +197,85 @@ t_ray				*init_ray(t_player *player, t_camera *camera, int x_screen);
 void				perform_raycasting(t_player *player, t_game *game);
 int					key_press(int keycode, t_game *game);
 int					key_release(int keycode, t_game *game);
-int					move(t_game *game);
+//int					move(t_game *game);
+void				move(t_game *game);
+
 void				draw_background(t_game *game);
 int					game_loop(t_game *game);
 void				reset_camera(t_player *player);
 void				load_bitmap(t_game *info, int idx, char *path);
-void	draw_floor(t_game *game);
-void	draw_ceiling(t_game *game);
+void				draw_floor(t_game *game);
+void				draw_ceiling(t_game *game);
 
 /*	[map_struct_funct.c]	- */
-void	ft_map_player_position(t_map *data, char **map);
-t_map	*create_map_from_data(t_data *data);
+void				ft_map_player_position(t_map *data, char **map);
+t_map				*create_map_from_data(t_data *data);
 
 /*	[parse_step.c]	- */
-int	ft_parsing_second(t_parse *parse, char **data, char **map);
-int	ft_parsing(char **tab);
+int					ft_parsing_second(t_parse *parse, char **data, char **map);
+int					ft_parsing(char **tab);
 
 /*	[parse_data_start.c]	- */
-int		parse_file_and_tab(char *filename, char ***tab);
-int		ft_parse_file(char *filename, char ***tab_ptr);
-int		ft_parse(char **argv, t_map **map);
-t_data	*create_data_from_tab(char **tab);
+int					parse_file_and_tab(char *filename, char ***tab);
+int					ft_parse_file(char *filename, char ***tab_ptr);
+int					ft_parse(char **argv, t_map **map);
+t_data				*create_data_from_tab(char **tab);
 
 /*	[parse_data_file.c]	- */
-char    *ft_file_path(const char *line);
-int ft_check_file(char *str);
-int	ft_map_lost(char c);
-int	ft_file(char *str);
+char				*ft_file_path(const char *line);
+int					ft_check_file(char *str);
+int					ft_map_lost(char c);
+int					ft_file(char *str);
 
 /*	[parse_error.c]	- */
-t_parse	*ft_check_error(char **data, t_parse *parse);
-t_parse	*ft_get_error(t_parse *parse, char **tab);
-int	ft_error(t_parse *parse);
+t_parse				*ft_check_error(char **data, t_parse *parse);
+t_parse				*ft_get_error(t_parse *parse, char **tab);
+int					ft_error(t_parse *parse);
 
 /*	[parse_color.c]	- */
-int validate_color_string(char *str, int i);
-int validate_rgb_color(char *str, int i);
-char *ft_file_color(char *str);
-int is_valid_character(char c);
-int	is_valid_number(char *str, int i);
+int					validate_color_string(char *str, int i);
+int					validate_rgb_color(char *str, int i);
+char				*ft_file_color(char *str);
+int					is_valid_character(char c);
+int					is_valid_number(char *str, int i);
 
 /*	[parse_data_init_and_free.c]	- */
-t_parse	*init_struct(t_parse *parse);
-t_data	*ft_free_data(t_data *data);
-char	**ft_free_tab(char **tab);
+t_parse				*init_struct(t_parse *parse);
+t_data				*ft_free_data(t_data *data);
+char				**ft_free_tab(char **tab);
 
 /*	[parse_cub.c]	- */
-int	ft_fd_cub(char *file);
-int	ft_cub(char *argv);
+int					ft_fd_cub(char *file);
+int					ft_cub(char *argv);
 
 /*	[parse_map.c]	-	*/
-void	ft_map_check(t_parse *parse, char **map, int actual, int y);
-t_parse	*ft_map(t_parse *parse, char **map);
+void				ft_map_check(t_parse *parse, char **map, int actual, int y);
+t_parse				*ft_map(t_parse *parse, char **map);
 
 /*	[parse_map_funct.c]	-	*/
-int	ft_map_player(char **map, int actual, int i, int y);
-int	ft_map_space(char **map, int actual, int i, int y);
-int	ft_map_zero(char **map, int actual, int i, int y);
-int	ft_map_char(char **map, int actual, int i);
-int	ft_map_total_position(char **map);
+int					ft_map_player(char **map, int actual, int i, int y);
+int					ft_map_space(char **map, int actual, int i, int y);
+int					ft_map_zero(char **map, int actual, int i, int y);
+int					ft_map_char(char **map, int actual, int i);
+int					ft_map_total_position(char **map);
 
 /*	[data_to_struct.c]	- */
-char	**ft_add_value_to_data(char **tab, t_parse *parse, char **data, int i);
-t_data	*ft_add_to_data(t_data *data, char **tab, int i);
-char	**ft_add_to_map(char **tab);
-int	ft_space(char *str);
+char				**ft_add_value_to_data(char **tab, t_parse *parse,
+						char **data, int i);
+t_data				*ft_add_to_data(t_data *data, char **tab, int i);
+char				**ft_add_to_map(char **tab);
+int					ft_space(char *str);
 
 /*	[parse_data_print_struct.c]	- */
-void print_struct(t_parse *parse);
-void print_data(const t_data *data);
+void				print_struct(t_parse *parse);
+void				print_data(const t_data *data);
 
-void free_game(t_game *game);
-
+void				calculate_texture_coordinates(t_ray *ray, t_tex *tex,
+						t_map *map, double *step);
+void				draw_ceiling(t_game *game);
+void				draw_floor(t_game *game);
+void				draw_background(t_game *game);
+unsigned int		convert_to_hexa(const char *rgb);
+void				free_game(t_game *game);
 
 #endif

@@ -14,12 +14,10 @@
 
 int	game_loop(t_game *game)
 {
-	if (move(game))
-	{
-		draw_floor(game);
-		draw_ceiling(game);
-		perform_raycasting(game->player, game);
-		mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
-	}
+	move(game);
+	draw_floor(game);
+	draw_ceiling(game);
+	perform_raycasting(game->player, game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }

@@ -76,6 +76,23 @@ void	rotate_left(t_player *player)
 		+ camera->camera_plane_y * cos(ROTATION_SPEED);
 }
 
+void	move(t_game *game)
+{
+	if (game->key.w == true)
+		move_vertical(game, 1);
+	else if (game->key.s == true)
+		move_vertical(game, -1);
+	else if (game->key.a == true)
+		move_horizontal(game, -1);
+	else if (game->key.d == true)
+		move_horizontal(game, 1);
+	else if (game->key.left == true)
+		rotate_left(game->player);
+	else if (game->key.right == true)
+		rotate_right(game->player);
+}
+
+/*
 int	move(t_game *game)
 {
 	if (game->key.w == true)
@@ -111,3 +128,4 @@ int	move(t_game *game)
 	else
 		return (0);
 }
+*/
