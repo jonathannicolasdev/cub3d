@@ -21,8 +21,11 @@ void	move_vertical(t_game *game, int direction)
 		* MOVE_SPEED;
 	y = game->player->pos_y + direction * game->player->vector_dir_y
 		* MOVE_SPEED;
-	game->player->pos_x = x;
-	game->player->pos_y = y;
+	if (game->map->map[(int)x][(int)y] != '1')
+	{
+		game->player->pos_x = x;
+		game->player->pos_y = y;
+	}
 }
 
 void	move_horizontal(t_game *game, int direction)
@@ -34,8 +37,11 @@ void	move_horizontal(t_game *game, int direction)
 		* MOVE_SPEED;
 	y = game->player->pos_y - direction * game->player->vector_dir_x
 		* MOVE_SPEED;
-	game->player->pos_x = x;
-	game->player->pos_y = y;
+	if (game->map->map[(int)x][(int)y] != '1')
+	{
+		game->player->pos_x = x;
+		game->player->pos_y = y;
+	}
 }
 
 void	rotate_right(t_player *player)

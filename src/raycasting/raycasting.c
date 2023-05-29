@@ -117,4 +117,5 @@ void	perform_raycasting(t_player *player, t_game *game)
 		perform_column_raycasting(player, camera, game, x);
 		x++;
 	}
+	free(camera);
 }
