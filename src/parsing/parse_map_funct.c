@@ -6,7 +6,7 @@
 /*   By: ylabbe <ylabbe@student.42quebec.c>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:54:06 by ylabbe            #+#    #+#             */
-/*   Updated: 2023/05/26 16:54:06 by ylabbe           ###   ########.fr       */
+/*   Updated: 2023/06/02 18:00:45 by ylabbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 int	ft_map_space(char **map, int actual, int i, int y)
 {
-	if (map[actual][i] == ' ')
+	if (ft_isspace(map[actual][i]) == '1')
 	{
 		if (i - 1 >= 0 && map[actual][i - 1] == '0')
+		{
 			return (1);
+		}
 		if (map[actual][i + 1] == '0')
+		{
 			return (1);
+		}
 		if (actual + 1 != y && map[actual + 1][i] == '0')
+		{
 			return (1);
+		}
 		if (actual != 0 && map[actual - 1][i] == '0')
+		{
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -52,7 +60,8 @@ int	ft_map_player(char **map, int actual, int i, int y)
 
 int	ft_map_char(char **map, int actual, int i)
 {
-	if (map[actual][i] != ' ' && map[actual][i] != '1' && map[actual][i] != '0'
+	if (ft_skip(map[actual][i]) != 1 && map[actual][i] != '1'
+		&& map[actual][i] != '0'
 		&& map[actual][i] != 'N' && map[actual][i] != 'S'
 		&& map[actual][i] != 'W' && map[actual][i] != 'E')
 		return (1);

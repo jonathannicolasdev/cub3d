@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 unsigned int	convert_to_hexa(const char *rgb)
 {

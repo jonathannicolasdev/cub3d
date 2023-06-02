@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 void	calculate_column_param(t_ray *ray, t_game *game)
 {

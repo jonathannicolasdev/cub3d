@@ -27,6 +27,7 @@ t_parse	*init_struct(t_parse *parse)
 	parse->file_ceiling = 0;
 	parse->file_wrong_line = 0;
 	parse->map_wg_corner = 0;
+	parse->file_too_much = 0;
 	return (parse);
 }
 

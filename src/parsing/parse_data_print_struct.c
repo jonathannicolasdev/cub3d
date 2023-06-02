@@ -22,18 +22,24 @@ void	print_data(const t_data *data)
 	printf("color_ceiling: %s\n", data->color_ceiling);
 }
 
-void	print_struct(t_parse *parse)
+int	ft_i(char *str)
 {
-	printf("parse->map_wg_player = %d\n", parse->map_wg_player);
-	printf("parse->map_wg_player_number = %d\n", parse->map_wg_player_number);
-	printf("parse->map_wg_space = %d\n", parse->map_wg_space);
-	printf("parse->map_wg_zero = %d\n", parse->map_wg_zero);
-	printf("parse->map_wg_character = %d\n", parse->map_wg_character);
-	printf("parse->file_north = %d\n", parse->file_north);
-	printf("parse->file_south = %d\n", parse->file_south);
-	printf("parse->file_west = %d\n", parse->file_west);
-	printf("parse->file_east = %d\n", parse->file_east);
-	printf("parse->file_floor = %d\n", parse->file_floor);
-	printf("parse->file_ceiling = %d\n", parse->file_ceiling);
-	printf("parse->file_wrong_line = %d\n", parse->file_wrong_line);
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == 'C' || str[i] == 'F')
+			return (i + 1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_skip(int c)
+{
+	if (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\r' || c == '\v' || c == '\f' || c == 32 || c == 9)
+		return (1);
+	return (0);
 }

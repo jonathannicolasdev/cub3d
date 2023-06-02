@@ -14,7 +14,7 @@
 
 int	ft_map_lost(char c)
 {
-	if (c != '\0' && c != '1' && c != '0' && c != ' ')
+	if (c != '\0' && c != '1' && c != '0' && c != ' ' && ft_isspace(c) != 1)
 		return (1);
 	return (0);
 }
@@ -51,19 +51,19 @@ int	ft_file(char *str)
 	i = 0;
 	if (str && str[i])
 	{
-		while (str[i] == ' ')
+		while (ft_isspace(str[i]) == 1)
 			i++;
-		if (str[i] == 'N' && str[i + 1] == 'O' && str[i + 2] == ' ')
+		if (str[i] == 'N' && str[i + 1] == 'O' && ft_skip(str[i + 2]) == 1)
 			return (1);
-		else if (str[i] == 'S' && str[i + 1] == 'O' && str[i + 2] == ' ')
+		else if (str[i] == 'S' && str[i + 1] == 'O' && ft_skip(str[i + 2]) == 1)
 			return (2);
-		else if (str[i] == 'W' && str[i + 1] == 'E' && str[i + 2] == ' ')
+		else if (str[i] == 'W' && str[i + 1] == 'E' && ft_skip(str[i + 2]) == 1)
 			return (3);
-		else if (str[i] == 'E' && str[i + 1] == 'A' && str[i + 2] == ' ')
+		else if (str[i] == 'E' && str[i + 1] == 'A' && ft_skip(str[i + 2]) == 1)
 			return (4);
-		else if (str[i] == 'F' && str[i + 1] == ' ')
+		else if (str[i] == 'F' && ft_skip(str[i + 1]) == 1)
 			return (5);
-		else if (str[i] == 'C' && str[i + 1] == ' ')
+		else if (str[i] == 'C' && ft_skip(str[i + 1]) == 1)
 			return (6);
 		else if (ft_map_lost(str[i]) == 1)
 			return (7);

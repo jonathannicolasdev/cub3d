@@ -28,9 +28,9 @@ t_parse	*ft_check_error(char **data, t_parse *parse)
 		else if (ft_file(data[i]) == 4 && parse->file_east == 1)
 			parse->file_east = ft_check_file(data[i]);
 		else if (ft_file(data[i]) == 5 && parse->file_floor == 1)
-			parse->file_floor = validate_rgb_color(data[i], 2);
+			parse->file_floor = validate_rgb_color(data[i], 0);
 		else if (ft_file(data[i]) == 6 && parse->file_ceiling == 1)
-			parse->file_ceiling = validate_rgb_color(data[i], 2);
+			parse->file_ceiling = validate_rgb_color(data[i], 0);
 		i++;
 	}
 	return (parse);
@@ -67,7 +67,7 @@ int	ft_error(t_parse *parse)
 	if (parse->file_north != 1 || parse->file_south != 1
 		|| parse->file_west != 1 || parse->file_east != 1
 		|| parse->file_ceiling != 1 || parse->file_floor != 1
-		|| parse->file_wrong_line != 0)
+		|| parse->file_wrong_line != 0 || parse->file_too_much != 6)
 	{
 		printf("Error\nColor or/and texture problem\n");
 		return (1);

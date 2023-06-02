@@ -79,3 +79,17 @@ fclean: clean
 	@cd minilibx_opengl && make clean
 
 re: fclean all
+
+invalid:
+	@for file in maps/bad/*; do \
+		echo "Running cub3D with $$file"; \
+		./cub3D "$$file"; \
+		sleep 3; \
+	done
+
+valid:
+	@for file in maps-test/good/*; do \
+		echo "Running cub3D with $$file"; \
+		./cub3D "$$file"; \
+		sleep 1; \
+	done

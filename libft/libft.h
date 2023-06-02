@@ -6,7 +6,7 @@
 /*   By: jnicolas <jnicolas@student.42quebec>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:56:32 by jnicolas          #+#    #+#             */
-/*   Updated: 2023/05/24 19:02:38 by ylabbe           ###   ########.fr       */
+/*   Updated: 2023/06/02 17:56:50 by ylabbe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ char	*ft_pstrdup(char *buffer, char c);
 char	*ft_strtok(char *str, const char *delim);
 char	*ft_char_strstr(const char *haystack, const char *needle);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
+int		ft_isspace(int c);
 
 #endif

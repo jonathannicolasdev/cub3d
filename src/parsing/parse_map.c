@@ -28,7 +28,9 @@ int	ft_map_zero_last_first(char **map, int y)
 	i = 0;
 	while (map[0][i])
 	{
-		if (map[0][i] == '0')
+		if (map[0][i] == '0' || map[0][i] == 'N'
+			|| map[0][i] == 'S' || map[0][i] == 'W'
+			|| map[0][i] == 'E')
 		{
 			return (1);
 		}

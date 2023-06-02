@@ -27,6 +27,16 @@ int	ft_parsing_second(t_parse *parse, char **data, char **map)
 	return (0);
 }
 
+int	ft_error_easy(t_parse *parse)
+{
+	if (parse->file_too_much != 6)
+	{
+		printf("Error\nI can't\n");
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_parsing(char **tab)
 {
 	t_parse	*parse;
@@ -45,6 +55,8 @@ int	ft_parsing(char **tab)
 	parse = init_struct(parse);
 	parse = ft_get_error(parse, tab);
 	data = ft_add_value_to_data(tab, parse, data, 0);
+	if (ft_error_easy(parse) == 1)
+		return (1);
 	map = ft_add_to_map(tab);
 	return (ft_parsing_second(parse, data, map));
 }

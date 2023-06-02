@@ -36,7 +36,8 @@ SRCS = ft_isalpha.c \
 	   ft_pstrdup.c \
 	   ft_strtok.c \
 	   ft_char_strstr.c \
-	   ft_strncpy.c
+	   ft_strncpy.c \
+	   ft_isspace.c
 
 OBJS = $(addprefix obj/, $(SRCS:.c=.o))
 

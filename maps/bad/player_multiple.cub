@@ -1,0 +1,21 @@
+NO ./bitmaps/north_test.xpm  
+SO ./bitmaps/south_test.xpm
+WE ./bitmaps/west_test.xpm
+EA ./bitmaps/east_test.xpm
+
+F 20,20,20
+C 200,200,200
+
+11111
+10001
+10S01
+10001
+10001
+10001
+11E01
+10001
+10001
+10001
+10001
+10001
+11111

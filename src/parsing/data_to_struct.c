@@ -51,6 +51,7 @@ char	**ft_add_value_to_data(char **tab, t_parse *parse, char **data, int i)
 				|| (type == 6 && parse->file_ceiling)))
 		{
 			data[k++] = ft_pstrdup(tab[i], '\0');
+			parse->file_too_much += 1;
 		}
 		i++;
 	}
@@ -88,9 +89,9 @@ int	ft_space(char *str)
 	char	*ptr;
 
 	ptr = str;
-	if (*ptr == ' ')
+	if (ft_isspace(*ptr) == 1)
 	{
-		while (*ptr == ' ')
+		while (ft_isspace(*ptr) == 1)
 			ptr++;
 	}
 	return (*ptr == '1' || *ptr == '0');

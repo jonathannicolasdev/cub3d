@@ -177,6 +177,7 @@ typedef struct s_parse
 	int				map_wg_zero;
 	int				map_wg_character;
 	int				map_wg_corner;
+	int				file_too_much;
 }					t_parse;
 
 typedef struct s_data
@@ -285,7 +286,6 @@ char				**ft_add_to_map(char **tab);
 int					ft_space(char *str);
 
 /*	[parse_data_print_struct.c]	- */
-void				print_struct(t_parse *parse);
 void				print_data(const t_data *data);
 
 /*	[parse_data_file_utils.c] -	*/
@@ -305,5 +305,7 @@ int					init_key_press(t_game *game);
 int					ft_pos_ns(char pos);
 int					ft_pos_we(char pos);
 void				free_img(t_img *image, t_game *game);
+int					ft_i(char *str);
+int					ft_skip(int c);
 
 #endif
